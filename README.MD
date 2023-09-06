@@ -1,5 +1,5 @@
 # CUSTMBRS - Cottage Usage Scheduling with Transaction Monitoring for a Beach Resort System
-
+![Alt text](image.png)
 ## Installation
 - Download XAMPP from [here](https://www.apachefriends.org/download.html)
 - Install XAMPP
