@@ -19,7 +19,12 @@ try {
     $stmt->bindParam(':user_id', $user_id);
     $stmt->execute();
     $transaction = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
+    if (!$transaction) {
+        header('Location: ../rent.php?type=error&message=Please create a transaction first');
+        exit();
+    }
+
     $transaction_id = $transaction['id'];
     $customer_id = $transaction['customer_id'];
 

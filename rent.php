@@ -53,7 +53,7 @@ if (isset($_SESSION['id'])) {
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TOTAL Price</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;price&gt;</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo total_price($_SESSION['id'])?? '0'; ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-credit-card fa-2x text-gray-300"></i></div>
                                     </div>
@@ -66,7 +66,7 @@ if (isset($_SESSION['id'])) {
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TOTAL COTTAGE</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;total&gt;</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo total_cottage($_SESSION['id'])?? '0'; ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-warehouse fa-2x text-gray-300"></i></div>
                                     </div>
