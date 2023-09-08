@@ -1,6 +1,7 @@
 <?php
 include_once 'functions/menu/offcanva-menu.php';
 include_once 'functions/authentication.php';
+include_once 'functions/tables/datatables.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -46,7 +47,7 @@ include_once 'functions/authentication.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Earnings (monthly)</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$40,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>$<?php echo get_sales() ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -59,7 +60,7 @@ include_once 'functions/authentication.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Earnings (annual)</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>$<?php echo get_sales('annual') ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-ruble-sign fa-2x text-gray-300"></i></div>
                                     </div>
@@ -72,7 +73,7 @@ include_once 'functions/authentication.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>TOTAL CUSTOMER</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo get_total_customer() ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-user-circle fa-2x text-gray-300"></i></div>
                                     </div>
@@ -85,7 +86,7 @@ include_once 'functions/authentication.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>NEW CUSTOMER</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;customer&gt;</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo new_customer() ?? 'None' ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-user-friends fa-2x text-gray-300"></i></div>
                                     </div>
@@ -100,30 +101,7 @@ include_once 'functions/authentication.php';
                                     <h6 class="text-primary fw-bold m-0">Top &lt;int&gt; Cottage</h6>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <h6 class="mb-0"><strong>&lt;cotage&gt;</strong></h6><span class="text-xs">RENT COUNT : &lt;int&gt;</span>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <h6 class="mb-0"><strong>&lt;cotage&gt;</strong></h6><span class="text-xs">RENT COUNT : &lt;int&gt;</span>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <h6 class="mb-0"><strong>&lt;cotage&gt;</strong></h6><span class="text-xs">RENT COUNT : &lt;int&gt;</span>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-star"></i></div>
-                                        </div>
-                                    </li>
+                                    <?php get_top_customers() ?>
                                 </ul>
                             </div>
                         </div>
@@ -133,30 +111,7 @@ include_once 'functions/authentication.php';
                                     <h6 class="text-primary fw-bold m-0">Top &lt;customer&gt;</h6>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <h6 class="mb-0"><strong>&lt;customer&gt;</strong></h6><i class="far fa-credit-card"></i><span class="text-xs">&nbsp;RENT COUNT: &lt;int&gt;</span>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <h6 class="mb-0"><strong>&lt;customer&gt;</strong></h6><i class="far fa-credit-card"></i><span class="text-xs">&nbsp;RENT COUNT: &lt;int&gt;</span>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-star"></i></div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <h6 class="mb-0"><strong>&lt;customer&gt;</strong></h6><i class="far fa-credit-card"></i><span class="text-xs">&nbsp;RENT COUNT: &lt;int&gt;</span>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-star"></i></div>
-                                        </div>
-                                    </li>
+                                    <?php get_top_cottages() ?>
                                 </ul>
                             </div>
                         </div>

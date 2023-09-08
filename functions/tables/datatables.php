@@ -1,7 +1,7 @@
 <?php
 include_once 'functions/connection.php';
 include_once 'functions/data/get-data.php';
-
+include_once 'functions/chart/get-chart.php';
 function user_logs(){
     global $db;
     $sql = 'SELECT * FROM logs';
@@ -138,5 +138,61 @@ function transaction_list(){
             </tr>
             <?php
         }
+    }
+}
+
+
+function get_top_customers(){
+    global $db;
+    $sql = "SELECT c.fullname, COUNT(*) AS total FROM transactions t
+        JOIN customers c ON t.customer_id = c.id
+        WHERE t.status = 'Pending'
+        GROUP BY c.fullname
+        ORDER BY total DESC
+        LIMIT 3";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $results = $statement->fetchAll(); // Fetch all results
+
+    foreach ($results as $row) {
+        ?>
+        <li class="list-group-item">
+            <div class="row align-items-center no-gutters">
+                <div class="col me-2">
+                    <h6 class="mb-0"><strong><?php echo $row['fullname']?></strong></h6>
+                    <span class="text-xs">RENT COUNT : <?php echo $row['total']?></span>
+                </div>
+                <div class="col-auto"><i class="fas fa-star"></i></div>
+            </div>
+        </li>
+        <?php
+    }
+}
+
+
+function get_top_cottages(){
+    global $db;
+    $sql = "SELECT c.name, COUNT(*) AS total FROM rentals r
+        JOIN cottages c ON r.cottage_id = c.id
+        GROUP BY c.name
+        ORDER BY total DESC
+        LIMIT 3";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $results = $statement->fetchAll();
+
+    foreach ($results as $row) {
+        ?>
+        <li class="list-group-item">
+            <div class="row align-items-center no-gutters">
+                <div class="col me-2">
+                    <h6 class="mb-0"><strong><?php echo $row['name']?></strong></h6>
+                    <i class="far fa-credit-card"></i>
+                    <span class="text-xs">RENT COUNT: <?php echo $row['total']?></span>
+                </div>
+                <div class="col-auto"><i class="fas fa-star"></i></div>
+            </div>
+        </li>
+        <?php
     }
 }

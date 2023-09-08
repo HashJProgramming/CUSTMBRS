@@ -47,7 +47,7 @@ include_once 'functions/tables/datatables.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TOP CUSTOMER</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;customer&gt;</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo get_top_customer() ?? 'None' ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -60,7 +60,7 @@ include_once 'functions/tables/datatables.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>TOTAL CUSTOMER</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo get_total_customer() ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-user-circle fa-2x text-gray-300"></i></div>
                                     </div>
@@ -73,7 +73,7 @@ include_once 'functions/tables/datatables.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>NEW CUSTOMER</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;customer&gt;</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo new_customer() ?? 'None' ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-user-friends fa-2x text-gray-300"></i></div>
                                     </div>

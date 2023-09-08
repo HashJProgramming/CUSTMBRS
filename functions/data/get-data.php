@@ -104,3 +104,84 @@ function get_sales($period = 'monthly') {
     
     return number_format($result['total'], 2);
 }
+
+function get_total_customer(){
+    global $db;
+    $sql = "SELECT COUNT(*) AS total FROM customers";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['total'];
+}
+
+function new_customer(){
+    global $db;
+    $sql = "SELECT * FROM customers ORDER BY id DESC LIMIT 1";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['fullname'];
+}
+
+function get_total_cottage(){
+    global $db;
+    $sql = "SELECT COUNT(*) AS total FROM cottages";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['total'];
+}
+
+function new_cottage(){
+    global $db;
+    $sql = "SELECT * FROM cottages ORDER BY id DESC LIMIT 1";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['name'];
+}
+
+function get_total_users(){
+    global $db;
+    $sql = "SELECT COUNT(*) AS total FROM users";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['total'];
+}
+
+function new_user(){
+    global $db;
+    $sql = "SELECT * FROM users ORDER BY id DESC LIMIT 1";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['username'];
+}
+
+function get_top_customer(){
+    global $db;
+    $sql = "SELECT c.fullname, COUNT(*) AS total FROM transactions t
+        JOIN customers c ON t.customer_id = c.id
+        WHERE t.status = 'Pending'
+        GROUP BY c.fullname
+        ORDER BY total DESC
+        LIMIT 1";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['fullname'];
+}
+
+function get_top_cottage(){
+    global $db;
+    $sql = "SELECT c.name, COUNT(*) AS total FROM rentals r
+        JOIN cottages c ON r.cottage_id = c.id
+        GROUP BY c.name
+        ORDER BY total DESC
+        LIMIT 1";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['name'];
+}

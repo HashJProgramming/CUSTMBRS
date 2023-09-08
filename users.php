@@ -47,7 +47,20 @@ include_once 'functions/tables/datatables.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TOTAL USERS</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;user&gt;</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo get_total_users() ?? 0 ?></span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>NEW USERS</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo new_user() ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
