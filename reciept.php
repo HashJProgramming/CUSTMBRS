@@ -45,10 +45,10 @@ function getItems(){
         $days = $interval->days;
         ?>
             <tr class="font-monospace" style="font-size: 10px;">
-                <td class="font-monospace" style="font-size: 10px;">ITEM:&nbsp;<strong><?php echo $row['cottage_name'] ?></strong></td>
+                <td class="font-monospace" style="font-size: 10px;">Cottage:&nbsp;<strong><?php echo $row['cottage_name'] ?></strong></td>
                 <td class="font-monospace text-end" style="font-size: 10px;"></td>
                 <td class="font-monospace text-center" style="font-size: 10px;"><strong>[<?php echo $row['start_datetime'] ?>] - [<?php echo $row['end_datetime'] ?>] |</strong>&nbsp;<?php echo $days ?> DAYS</td>
-                <td class="font-monospace text-end" style="font-size: 10px;"><strong>₱<?php echo $row['price'] ?></strong></td>
+                <td class="font-monospace text-end" style="font-size: 10px;"><strong>₱<?php echo number_format($row['price'], 2) ?></strong></td>
             </tr>
         <?php
     }
@@ -124,7 +124,7 @@ function getItems(){
         <table class="table">
             <thead class="font-monospace">
                 <tr class="font-monospace">
-                    <th class="font-monospace text-end"><strong>TOTAL</strong>&nbsp;<strong>₱<?php echo $total; ?></strong></th>
+                    <th class="font-monospace text-end"><strong>TOTAL</strong>&nbsp;<strong>₱<?php echo number_format($total, 2); ?></strong></th>
                 </tr>
             </thead>
             <tbody>
