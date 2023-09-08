@@ -34,7 +34,9 @@
             CREATE TABLE IF NOT EXISTS cottages (
               id INT PRIMARY KEY AUTO_INCREMENT,
               name VARCHAR(255),
-              price DOUBLE,
+              priceDay DOUBLE,
+              priceNight DOUBLE,
+              picture VARCHAR(255),
               created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ");

@@ -82,3 +82,33 @@ function staff_list(){
     <?php
     }
 }
+
+
+function cottage_list(){
+    global $db;
+    $sql = 'SELECT * FROM cottages';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    foreach ($results as $row){
+    ?>
+
+    <div class="col-xl-4">
+        <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="functions/<?php echo $row['picture']; ?>">
+            <div class="card-body p-4">
+                <p class="text-primary card-text mb-0">Cottage ID: <?php echo $row['id']; ?></p>
+                <h4 class="card-title"><?php echo $row['name']; ?></h4>
+                <p class="card-text">Price DayTime: ₱<?php echo number_format($row['priceDay'], 2); ?></p>
+                <p class="card-text">Price NightTime: ₱<?php echo number_format($row['priceNight'], 2); ?></p>
+                <div class="d-flex">
+                    <a class="btn btn-primary mx-1" href="calendar.php" type="button">View</a>
+                    <button class="btn btn-warning mx-1" type="button" data-bs-target="#update" data-id="<?php echo $row['id']; ?>" data-name="<?php echo $row['name']; ?>" data-day="<?php echo $row['priceDay']; ?>" data-night="<?php echo $row['priceNight']; ?>" data-bs-toggle="modal">Update</button>
+                    <button class="btn btn-danger mx-1" type="button" data-bs-target="#remove"data-id="<?php echo $row['id']; ?>"  data-bs-toggle="modal">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+    }
+}

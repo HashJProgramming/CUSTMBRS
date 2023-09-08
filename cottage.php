@@ -1,6 +1,7 @@
 <?php
 include_once 'functions/menu/offcanva-menu.php';
 include_once 'functions/authentication.php';
+include_once 'functions/tables/datatables.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -73,25 +74,16 @@ include_once 'functions/authentication.php';
                                 <div class="col">
                                     <p class="text-primary m-0 fw-bold">Cottage List</p>
                                 </div>
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                                         <div class="input-group"><input class="bg-light form-control border-0 small bg-white" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" placeholder="Search for ..." title="Here you can search for cottage name." style="background: var(--bs-info-border-subtle);"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-                                <div class="col-xl-4">
-                                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">&lt;cottage_id&gt;</p>
-                                            <h4 class="card-title">&lt;cottage&gt;</h4>
-                                            <p class="card-text">&lt;price&gt;</p>
-                                            <div class="d-flex"><button class="btn btn-primary mx-1" type="button">View</button><button class="btn btn-warning mx-1" type="button" data-bs-target="#update" data-bs-toggle="modal">Update</button><button class="btn btn-danger mx-1" type="button" data-bs-target="#remove" data-bs-toggle="modal">Remove</button></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php cottage_list(); ?>
                             </div>
                         </div>
                     </div>
@@ -112,13 +104,23 @@ include_once 'functions/authentication.php';
                     <h4 class="modal-title">Add Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="post" novalidate>
-                        <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
+                    <form class="needs-validation" action="functions/cottage-create.php" method="post" enctype="multipart/form-data" novalidate>
+                    <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
                         <div class="invalid-feedback">
                             Please enter your cottage name.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*">
+                    <div class="mb-1"><label class="form-label">Price Day</label><input class="form-control" type="number" name="priceDay" required="" value="0">
+                        <div class="invalid-feedback">
+                            Please enter your price.
+                        </div>
+                    </div>
+                    <div class="mb-1"><label class="form-label">Price Night</label><input class="form-control" type="number" name="priceNight" required="" value="0">
+                        <div class="invalid-feedback">
+                            Please enter your price.
+                        </div>
+                    </div>
+                    <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*">
                         <div class="invalid-feedback">
                             Please add cottage picture.
                         </div>
@@ -137,13 +139,24 @@ include_once 'functions/authentication.php';
                     <h4 class="modal-title">Update Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="post" novalidate>
-                        <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
+                    <form class="needs-validation" action="functions/cottage-update.php" method="post" enctype="multipart/form-data" novalidate>
+                    <input type="hidden" name="id">
+                    <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
                         <div class="invalid-feedback">
                             Please enter your cottage name.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*">
+                    <div class="mb-1"><label class="form-label">Price Day</label><input class="form-control" type="number" name="priceDay" required="" value="0">
+                        <div class="invalid-feedback">
+                            Please enter your price.
+                        </div>
+                    </div>
+                    <div class="mb-1"><label class="form-label">Price Night</label><input class="form-control" type="number" name="priceNight" required="" value="0">
+                        <div class="invalid-feedback">
+                            Please enter your price.
+                        </div>
+                    </div>
+                    <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*">
                         <div class="invalid-feedback">
                             Please add cottage picture.
                         </div>
@@ -155,6 +168,7 @@ include_once 'functions/authentication.php';
             </div>
         </div>
     </div>
+
     
     <div class="modal fade" role="dialog" tabindex="-1" id="remove">
         <div class="modal-dialog" role="document">
@@ -165,7 +179,10 @@ include_once 'functions/authentication.php';
                 <div class="modal-body">
                     <p>Are you sure you want to remove this customer?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
+                <form action="functions/cottage-remove.php" method="post">
+                    <input type="hidden" name="id">
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Remove</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -182,7 +199,6 @@ include_once 'functions/authentication.php';
     <script src="assets/js/buttons.html5.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/fullcalendar.js"></script>
     <script src="assets/js/index.global.min.js"></script>
     <script src="assets/js/tinymce.min.js"></script>
 </body>

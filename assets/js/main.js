@@ -1,10 +1,7 @@
 (function () {
     'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
   
-    // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
       .forEach(function (form) {
         form.addEventListener('submit', function (event) {
@@ -81,7 +78,6 @@ new DataTable('table.table-display',{
             var address = $(this).data('address');
             var phone = $(this).data('phone');
 
-        //    console.log(id, fullname, address, phone, email, date);
             $('input[name="id"]').val(id);
             $('input[name="fullname"]').val(fullname);
             $('input[name="address"]').val(address);
@@ -101,28 +97,17 @@ new DataTable('table.table-display',{
             console.log(id, username);
         });
 
-      } else if (currentPath.includes("/CUSTMBRS/inventory.php")) {
-        $('a[data-bs-target="#update"]').on('click', function() {
+      } else if (currentPath.includes("/CUSTMBRS/cottage.php")) {
+        $('button[data-bs-target="#update"]').on('click', function() {
             var id = $(this).data('id');
             var name = $(this).data('name');
-            var description = $(this).data('description');
-            $('input[name="data_id"]').val(id);
+            var day = $(this).data('day');
+            var night = $(this).data('night');
+            $('input[name="id"]').val(id);
             $('input[name="name"]').val(name);
-            $('input[name="description"]').val(description);
+            $('input[name="priceDay"]').val(day);
+            $('input[name="priceNight"]').val(night);
             console.log(id); 
-            $('input[name="data_id"]').val(id);
-        });
-
-        $('a[data-bs-target="#stock-in"]').on('click', function() {
-            var id = $(this).data('id');
-            console.log(id); 
-            $('input[name="data_id"]').val(id);
-        });
-
-        $('a[data-bs-target="#stock-out"]').on('click', function() {
-            var id = $(this).data('id');
-            console.log(id); 
-            $('input[name="data_id"]').val(id);
         });
       }else if (currentPath.includes("/CUSTMBRS/rents.php")) {
         $('a[data-bs-target="#return"]').on('click', function() {
@@ -149,6 +134,11 @@ new DataTable('table.table-display',{
 
 
     $('a[data-bs-target="#remove"]').on('click', function() {
+        var id = $(this).data('id');
+        console.log(id); 
+        $('input[name="id"]').val(id);
+    });
+    $('button[data-bs-target="#remove"]').on('click', function() {
         var id = $(this).data('id');
         console.log(id); 
         $('input[name="id"]').val(id);
