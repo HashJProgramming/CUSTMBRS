@@ -90,7 +90,7 @@ function get_sales($period = 'monthly') {
         FROM transactions t
         JOIN rentals r ON t.id = r.transact_id
         JOIN cottages co ON r.cottage_id = co.id
-        WHERE t.status = 'Pending'";
+        WHERE t.status = 'Proceed'";
     
     if ($period === 'monthly') {
         $sql .= " AND DATE_FORMAT(t.created_at, '%Y-%m') = DATE_FORMAT(CURRENT_DATE, '%Y-%m')";
@@ -111,7 +111,7 @@ function get_total_customer(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['total'];
+    return $result['total'] ?? 0;
 }
 
 function new_customer(){
@@ -120,7 +120,7 @@ function new_customer(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['fullname'];
+    return $result['fullname'] ?? 'None';
 }
 
 function get_total_cottage(){
@@ -129,7 +129,7 @@ function get_total_cottage(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['total'];
+    return $result['total'] ?? 0;
 }
 
 function new_cottage(){
@@ -138,7 +138,7 @@ function new_cottage(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['name'];
+    return $result['name'] ?? 'None';
 }
 
 function get_total_users(){
@@ -147,7 +147,7 @@ function get_total_users(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['total'];
+    return $result['total'] ?? 0;
 }
 
 function new_user(){
@@ -156,21 +156,21 @@ function new_user(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['username'];
+    return $result['username'] ?? 'None';
 }
 
 function get_top_customer(){
     global $db;
     $sql = "SELECT c.fullname, COUNT(*) AS total FROM transactions t
         JOIN customers c ON t.customer_id = c.id
-        WHERE t.status = 'Pending'
+        WHERE t.status = 'Proceed'
         GROUP BY c.fullname
         ORDER BY total DESC
         LIMIT 1";
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['fullname'];
+    return $result['fullname'] ?? 'None';
 }
 
 function get_top_cottage(){
@@ -183,7 +183,7 @@ function get_top_cottage(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['name'];
+    return $result['name'] ?? 'None';
 }
 
 function get_current_sales(){
@@ -196,7 +196,7 @@ function get_current_sales(){
         FROM transactions t
         JOIN rentals r ON t.id = r.transact_id
         JOIN cottages co ON r.cottage_id = co.id
-        WHERE t.status = 'Pending'
+        WHERE t.status = 'Proceed'
         AND DATE_FORMAT(t.created_at, '%Y-%m-%d') = DATE_FORMAT(CURRENT_DATE, '%Y-%m-%d')";
     $statement = $db->prepare($sql);
     $statement->execute();
