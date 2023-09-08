@@ -1,7 +1,7 @@
 <?php
 include_once 'functions/menu/offcanva-menu.php';
 include_once 'functions/authentication.php';
-
+include_once 'functions/tables/datatables.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -47,7 +47,7 @@ include_once 'functions/authentication.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>CURRENT SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;customer&gt;</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_current_sales() ?? 0?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -60,7 +60,7 @@ include_once 'functions/authentication.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>MONTLY SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales() ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -73,7 +73,7 @@ include_once 'functions/authentication.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>ANNUAL SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales('annual') ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -83,27 +83,25 @@ include_once 'functions/authentication.php';
                     </div>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Customer List</p>
+                            <p class="text-primary m-0 fw-bold">Transaction List</p>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0 table-display" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Fullname</th>
-                                            <th>Address</th>
-                                            <th>Phone</th>
+                                            <th>Cottage</th>
+                                            <th>Price</th>
+                                            <th>Type</th>
                                             <th>Created At</th>
-                                            <th>Total Sales</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/logo.png">Airi Satou</td>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">Airi Satou</td>
                                             <td>&lt;address&gt;</td>
                                             <td>&lt;phone&gt;</td>
                                             <td>&lt;created_at&gt;</td>
-                                            <td>&lt;sales&gt;</td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
