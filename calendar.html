@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Cottages - CUSTMBRS</title>
+    <title>Calendar - CUSTMBRS</title>
     <meta name="description" content="CUSTMBRS - Cottage Usage Scheduling with Transaction Monitoring for a Beach Resort System">
     <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/logo.png">
     <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/logo.png">
@@ -32,7 +32,7 @@
             <div id="content">
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Cottage Management</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal"><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Add Cottage</a>
+                        <h3 class="text-dark mb-0">Calendar</h3>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-xl-3 mb-4">
@@ -40,8 +40,21 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TOP COTTAGE</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;cottage&gt;</span></div>
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>CURRENT SALES</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;customer&gt;</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres your total customer registered.">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>MONTLY SALES</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -53,41 +66,19 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>NEW COTTAGE</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>&lt;cottage&gt;</span></div>
+                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>ANNUAL SALES</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
                                         </div>
-                                        <div class="col-auto"><i class="fas fa-user-friends fa-2x text-gray-300"></i></div>
+                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card shadow">
-                        <div class="card-header py-3">
-                            <div class="row">
-                                <div class="col">
-                                    <p class="text-primary m-0 fw-bold">Cottage List</p>
-                                </div>
-                                <div class="col-3">
-                                    <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small bg-white" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" placeholder="Search for ..." title="Here you can search for cottage name." style="background: var(--bs-info-border-subtle);"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="card-header py-3"></div>
                         <div class="card-body">
-                            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-                                <div class="col-xl-4">
-                                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">&lt;cottage_id&gt;</p>
-                                            <h4 class="card-title">&lt;cottage&gt;</h4>
-                                            <p class="card-text">&lt;price&gt;</p>
-                                            <div class="d-flex"><button class="btn btn-primary mx-1" type="button">View</button><button class="btn btn-warning mx-1" type="button" data-bs-target="#update" data-bs-toggle="modal">Update</button><button class="btn btn-danger mx-1" type="button" data-bs-target="#remove" data-bs-toggle="modal">Remove</button></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div id="calendar"></div>
                         </div>
                     </div>
                 </div>
@@ -139,51 +130,24 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="add">
+    <div class="modal fade" role="dialog" tabindex="-1" id="report">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Generate Report</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name"></div>
-                        <div class="mb-1"><label class="form-label">Price Day</label><input class="form-control" type="number" name="day" required="" value="0"></div>
-                        <div class="mb-1"><label class="form-label">Price Night</label><input class="form-control" type="number" name="night" required="" value="0"></div>
-                        <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*"></div>
+                    <p>Select Datetime to generate report</p>
+                    <form>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6"><input class="form-control" type="date" name="date_start"></div>
+                                <div class="col-md-6"><input class="form-control" type="date" name="date_end"></div>
+                            </div>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="update">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required=""></div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required=""></div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required=""></div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="remove">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Remove Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to remove this customer?</p>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Generate</button></div>
             </div>
         </div>
     </div>
