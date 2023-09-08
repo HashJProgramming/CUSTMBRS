@@ -39,7 +39,7 @@ function menu(){
                     <hr>
                     <div class="dropdown"><a class="dropdown-toggle link-body-emphasis d-flex align-items-center text-decoration-none" aria-expanded="false" data-bs-toggle="dropdown" role="button"><img class="rounded-circle me-2" alt="" width="32" height="32" src="assets/img/icon.png" style="object-fit: cover;"><strong>Administrator</strong>&nbsp;</a>
                         <div class="dropdown-menu shadow text-small" data-popper-placement="top-start"><a class="dropdown-item" href="#">Users Logs</a><a class="dropdown-item" href="#">Change Password</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Sign out</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="functions/logout.php">Sign out</a>
                         </div>
                     </div>
                 </div>

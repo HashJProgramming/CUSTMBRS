@@ -1,5 +1,6 @@
 <?php
-include_once 'functions/menu/offcanva-menu.php'
+include_once 'functions/menu/offcanva-menu.php';
+include_once 'functions/authentication.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -130,13 +131,25 @@ include_once 'functions/menu/offcanva-menu.php'
                     <h4 class="modal-title">Add Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required=""></div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required=""></div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required=""></div>
-                    </form>
+                    <form class="needs-validation" method="post" novalidate>
+                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required="">
+                        <div class="invalid-feedback">
+                            Please enter your fullname.
+                        </div>
+                    </div>
+                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required="">
+                        <div class="invalid-feedback">
+                            Please enter your address.
+                        </div>
+                    </div>
+                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required="">
+                        <div class="invalid-feedback">
+                            Please enter your phone number.
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -144,16 +157,28 @@ include_once 'functions/menu/offcanva-menu.php'
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Update Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required=""></div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required=""></div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required=""></div>
-                    </form>
+                    <form class="needs-validation" method="post" novalidate>
+                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required="">
+                        <div class="invalid-feedback">
+                            Please enter your fullname.
+                        </div>
+                    </div>
+                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required="">
+                        <div class="invalid-feedback">
+                            Please enter your address.
+                        </div>
+                    </div>
+                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required="">
+                        <div class="invalid-feedback">
+                            Please enter your phone number.
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>

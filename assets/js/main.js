@@ -1,3 +1,23 @@
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })();
+
 $(document).ready(function() {
     const currentPath = window.location.pathname;
     const urlParams = new URLSearchParams(window.location.search);
@@ -10,13 +30,13 @@ new DataTable('table.table-display',{
         
         { 
             extend: 'excel', 
-            title: 'UMLTFIPGB - Utilizing Machine Learning Technique to Forecast the Influence of Population Growth on the Budget of Barangay Begong', 
+            title: 'CUSTMBRS - Cottage Usage Scheduling with Transaction Monitoring for a Beach Resort System', 
             className: 'btn btn-primary',
             text: '<i class="fa fa-file-excel"></i> EXCEL'
         },
         {
             extend: 'pdf',
-            title: 'UMLTFIPGB - Utilizing Machine Learning Technique to Forecast the Influence of Population Growth on the Budget of Barangay Begong', 
+            title: 'CUSTMBRS - Cottage Usage Scheduling with Transaction Monitoring for a Beach Resort System', 
             className: 'btn btn-primary',
             text: '<i class="fa fa-file-pdf"></i> PDF'
         },
@@ -24,7 +44,7 @@ new DataTable('table.table-display',{
             extend: 'print', 
             className: 'btn btn-primary',
             text: '<i class="fa fa-print"></i> Print',
-            title: 'UMLTFIPGB - Utilizing Machine Learning Technique to Forecast the Influence of Population Growth on the Budget of Barangay Begong', 
+            title: 'CUSTMBRS - Cottage Usage Scheduling with Transaction Monitoring for a Beach Resort System', 
             autoPrint: true,
             exportOptions: {
                 columns: ':visible',
@@ -39,20 +59,6 @@ new DataTable('table.table-display',{
         }
     ]
 });
-
-// VANTA.WAVES({
-//     el: "#bg-animation",
-//     mouseControls: false,
-//     touchControls: true,
-//     gyroControls: false,
-//     minHeight: 200.00,
-//     minWidth: 200.00,
-//     scale: 1.00,
-//     scaleMobile: 1.00,
-//     color: 0xb7b7c0,
-//     waveSpeed: 1.00,
-//     zoom: 0.60
-//   })  
     
     if (type == 'success') {
         Swal.fire(

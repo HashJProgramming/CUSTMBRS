@@ -1,5 +1,6 @@
 <?php
-include_once 'functions/menu/offcanva-menu.php'
+include_once 'functions/menu/offcanva-menu.php';
+include_once 'functions/authentication.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -111,14 +112,21 @@ include_once 'functions/menu/offcanva-menu.php'
                     <h4 class="modal-title">Add Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name"></div>
-                        <div class="mb-1"><label class="form-label">Price Day</label><input class="form-control" type="number" name="day" required="" value="0"></div>
-                        <div class="mb-1"><label class="form-label">Price Night</label><input class="form-control" type="number" name="night" required="" value="0"></div>
-                        <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*"></div>
-                    </form>
+                    <form class="needs-validation" method="post" novalidate>
+                        <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
+                        <div class="invalid-feedback">
+                            Please enter your cottage name.
+                        </div>
+                    </div>
+                        <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*">
+                        <div class="invalid-feedback">
+                            Please add cottage picture.
+                        </div>
+                    </div>
+                   
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -126,19 +134,28 @@ include_once 'functions/menu/offcanva-menu.php'
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Update Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required=""></div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required=""></div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required=""></div>
-                    </form>
+                    <form class="needs-validation" method="post" novalidate>
+                        <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
+                        <div class="invalid-feedback">
+                            Please enter your cottage name.
+                        </div>
+                    </div>
+                        <div class="mb-1"><label class="form-label">Picture</label><input class="form-control" type="file" name="picture" required="" accept="image/*">
+                        <div class="invalid-feedback">
+                            Please add cottage picture.
+                        </div>
+                    </div>
+                   
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
+    
     <div class="modal fade" role="dialog" tabindex="-1" id="remove">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
