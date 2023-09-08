@@ -152,7 +152,10 @@
                     <li class="nav-item"><a class="nav-link link-body-emphasis" href="rent.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-calendar-plus me-2">
                                 <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"></path>
                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"></path>
-                            </svg>&nbsp;Rent / Transaction</a></li>
+                            </svg>&nbsp;Rent / Transaction</a><a class="nav-link link-body-emphasis" href="rental-type.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-calendar-plus me-2">
+                                <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"></path>
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"></path>
+                            </svg>&nbsp;Rental Type Management</a></li>
                     <li class="nav-item"><a class="nav-link link-body-emphasis" href="cottage.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-grid me-2">
                                 <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path>
                             </svg> Cottage Management</a></li>
@@ -187,7 +190,7 @@
                 </div>
                 <div class="modal-body">
                     <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Customer</label><select class="form-select">
+                        <div class="mb-1"><label class="form-label">Customer</label><select class="selectpicker select" data-live-search="true" name="customer">
                                 <optgroup label="SELECT CUSTOMER">
                                     <option value="1" selected="">&lt;customer&gt;</option>
                                 </optgroup>
@@ -206,17 +209,23 @@
                 </div>
                 <div class="modal-body">
                     <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Cottage</label><select class="form-select">
-                                <optgroup label="SELECT COTTAGE">
-                                    <option value="1" selected="">&lt;cottage&gt;</option>
-                                </optgroup>
-                            </select></div>
-                        <div class="mb-1"><label class="form-label">Rent type</label><select class="form-select">
+                        <div class="mb-1"><label class="form-label">Cottage</label><select class="selectpicker select" data-live-search="true" name="cottage">
+                            <optgroup label="SELECT COTTAGE">
+                                <option value="1" selected="">&lt;cottage&gt;</option>
+                            </optgroup>
+                        </select></div>
+                        <div class="mb-1"><label class="form-label">Rent type</label><select class="selectpicker select" data-live-search="true" name="type">
                                 <optgroup label="SELECT TYPE">
                                     <option value="1" selected="">&lt;type&gt;</option>
                                 </optgroup>
-                            </select></div>
-                        <div class="mb-1"><label class="form-label">Date</label><input class="form-control" name="phone" required="" type="date"></div>
+                            </select></div><div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
+            <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
+        </div>
+    </div>
+</div>
                     </form>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
@@ -227,21 +236,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add User</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Update Type</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Customer</label><select class="form-select">
-                                <optgroup label="SELECT CUSTOMER">
-                                    <option value="1" selected="">&lt;customer&gt;</option>
-                                </optgroup>
-                            </select></div>
-                        <div class="mb-1"><label class="form-label">Rent type</label><select class="form-select">
+                        <div class="mb-1"><label class="form-label">Cottage</label><select class="selectpicker select" data-live-search="true" name="cottage">
+                            <optgroup label="SELECT COTTAGE">
+                                <option value="1" selected="">&lt;cottage&gt;</option>
+                            </optgroup>
+                        </select></div>
+                        <div class="mb-1"><label class="form-label">Rent type</label><select class="selectpicker select" data-live-search="true" name="type">
                                 <optgroup label="SELECT TYPE">
                                     <option value="1" selected="">&lt;type&gt;</option>
                                 </optgroup>
                             </select></div>
-                        <div class="mb-1"><label class="form-label">Date</label><input class="form-control" name="phone" required="" type="date"></div>
+                            <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
+                                        <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
+                                    </div>
+                                </div>
+                            </div>
                     </form>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
