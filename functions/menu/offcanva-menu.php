@@ -3,7 +3,7 @@
 function menu(){
     ?>
         <div class="offcanvas offcanvas-end bg-body" tabindex="-1" id="offcanvas-menu">
-            <div class="offcanvas-header"><img src="assets/img/icon.png" width="32"><a class="link-body-emphasis d-flex align-items-center me-md-auto mb-3 mb-md-0 text-decoration-none" href="/"><span class="fs-4">&nbsp;Menu</span></a><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="offcanvas"></button></div>
+            <div class="offcanvas-header"><img src="assets/img/icon.png" width="32"><a class="link-body-emphasis d-flex align-items-center me-md-auto mb-3 mb-md-0 text-decoration-none" href="index.php"><span class="fs-4">&nbsp;Menu</span></a><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="offcanvas"></button></div>
             <div class="offcanvas-body d-flex flex-column justify-content-between pt-0">
                 <div>
                     <hr class="mt-0">

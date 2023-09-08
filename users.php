@@ -60,7 +60,7 @@ include_once 'functions/authentication.php';
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
-                                <table class="table my-0" id="dataTable">
+                                <table class="table my-0 table-display" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th>Username</th>
