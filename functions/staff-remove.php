@@ -2,7 +2,7 @@
 include_once 'connection.php';
 
 try {
-    $id = $_POST['data_id'];
+    $id = $_POST['id'];
     
     $sql = "SELECT * FROM users WHERE id = :id";
     $statement = $db->prepare($sql);
@@ -14,9 +14,9 @@ try {
     $statement = $db->prepare($sql);
     $statement->bindParam(':id', $id);
     $statement->execute();
-    generate_logs('Removing Staff',  $result['username'].' was removed');
-    header('Location: ../staff.php?type=success&message='.$result['username'].' was removed successfully!');
+    generate_logs('Removing user',  $result['username'].' was removed');
+    header('Location: ../users.php?type=success&message='.$result['username'].' was removed successfully!');
 } catch (\Throwable $th) {
-    generate_logs('Removing Staff', $th);
-    header('Location: ../staff.php?type=error&message=Something went wrong, please try again');
+    generate_logs('Removing users', $th);
+    header('Location: ../users.php?type=error&message=Something went wrong, please try again');
 }

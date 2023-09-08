@@ -1,6 +1,7 @@
 <?php
 include_once 'functions/menu/offcanva-menu.php';
 include_once 'functions/authentication.php';
+include_once 'functions/tables/datatables.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -72,14 +73,7 @@ include_once 'functions/authentication.php';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/logo.png">&nbsp;&lt;username&gt;</td>
-                                            <td>&lt;password&gt;</td>
-                                            <td>&lt;phone&gt;</td>
-                                            <td>&lt;address&gt;</td>
-                                            <td>&lt;created_at&gt;</td>
-                                            <td class="text-center"><a class="mx-1" href="#"><i class="fas fa-eye fs-4"></i></a><a class="mx-1" href="#" data-bs-target="#update" data-bs-toggle="modal"><i class="fas fa-user-edit fs-4 text-warning"></i></a><a class="mx-1" href="#" data-bs-target="#remove" data-bs-toggle="modal"><i class="fas fa-trash-alt fs-4 text-danger"></i></a></td>
-                                        </tr>
+                                    <?php staff_list(); ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
@@ -105,7 +99,7 @@ include_once 'functions/authentication.php';
                     <h4 class="modal-title">Add User</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="post" novalidate>
+                    <form class="needs-validation" action="functions/staff-create.php" method="post" novalidate>
                         <div class="mb-1"><label class="form-label">Username</label><input class="form-control" type="text" name="username" required="">
                         <div class="invalid-feedback">
                             Please enter your username.
@@ -140,7 +134,8 @@ include_once 'functions/authentication.php';
                     <h4 class="modal-title">Update User</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="post" novalidate>
+                    <form class="needs-validation" action="functions/staff-update.php" method="post" novalidate>
+                        <input type="hidden" name="id">
                         <div class="mb-1"><label class="form-label">Username</label><input class="form-control" type="text" name="username" required="">
                         <div class="invalid-feedback">
                             Please enter your username.
@@ -177,7 +172,10 @@ include_once 'functions/authentication.php';
                 <div class="modal-body">
                     <p>Are you sure you want to remove this User?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
+                <form action="functions/staff-remove.php" method="post">
+                <input type="hidden" name="id">
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Remove</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -194,7 +192,6 @@ include_once 'functions/authentication.php';
     <script src="assets/js/buttons.html5.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/fullcalendar.js"></script>
     <script src="assets/js/index.global.min.js"></script>
     <script src="assets/js/tinymce.min.js"></script>
 </body>

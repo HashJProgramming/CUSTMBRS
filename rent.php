@@ -1,6 +1,7 @@
 <?php
 include_once 'functions/menu/offcanva-menu.php';
 include_once 'functions/authentication.php';
+include_once 'functions/tables/datatables.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -154,7 +155,7 @@ include_once 'functions/authentication.php';
                     <form novalidate="" method="post">
                         <div class="mb-1"><label class="form-label">Customer</label><select class="selectpicker select" data-live-search="true" name="customer">
                                 <optgroup label="SELECT CUSTOMER">
-                                    <option value="1" selected="">&lt;customer&gt;</option>
+                                    <?php customers(); ?>
                                 </optgroup>
                             </select></div>
                     </form>

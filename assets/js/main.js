@@ -88,17 +88,20 @@ new DataTable('table.table-display',{
             $('input[name="phone"]').val(phone);
         });
 
-      } else if (currentPath.includes("/RMMFB/staff.php")) {
+      } else if (currentPath.includes("/CUSTMBRS/users.php")) {
         $('a[data-bs-target="#update"]').on('click', function() {
             var id = $(this).data('id');
             var username = $(this).data('username');
-            console.log(id, username);
-
-            $('input[name="data_id"]').val(id);
+            var address = $(this).data('address');
+            var phone = $(this).data('phone');
+            $('input[name="id"]').val(id);
             $('input[name="username"]').val(username);
-
+            $('input[name="address"]').val(address);
+            $('input[name="phone"]').val(phone);
+            console.log(id, username);
         });
-      } else if (currentPath.includes("/RMMFB/inventory.php")) {
+
+      } else if (currentPath.includes("/CUSTMBRS/inventory.php")) {
         $('a[data-bs-target="#update"]').on('click', function() {
             var id = $(this).data('id');
             var name = $(this).data('name');
@@ -121,7 +124,7 @@ new DataTable('table.table-display',{
             console.log(id); 
             $('input[name="data_id"]').val(id);
         });
-      }else if (currentPath.includes("/RMMFB/rents.php")) {
+      }else if (currentPath.includes("/CUSTMBRS/rents.php")) {
         $('a[data-bs-target="#return"]').on('click', function() {
             var id = $(this).data('id');
             $('input[name="data_id"]').val(id);
