@@ -1,6 +1,7 @@
 <?php
 include_once 'functions/menu/offcanva-menu.php';
 include_once 'functions/authentication.php';
+include_once 'functions/tables/datatables.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -93,19 +94,11 @@ include_once 'functions/authentication.php';
                                             <th>Address</th>
                                             <th>Phone</th>
                                             <th>Created At</th>
-                                            <th>Total Sales</th>
                                             <th class="text-center">Option</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">Airi Satou</td>
-                                            <td>&lt;address&gt;</td>
-                                            <td>&lt;phone&gt;</td>
-                                            <td>&lt;created_at&gt;</td>
-                                            <td>&lt;sales&gt;</td>
-                                            <td class="text-center"><a class="mx-1" href="#"><i class="fas fa-eye fs-4"></i></a><a class="mx-1" href="#" data-bs-target="#update" data-bs-toggle="modal"><i class="fas fa-user-edit fs-4 text-warning"></i></a><a class="mx-1" href="#" data-bs-target="#remove" data-bs-toggle="modal"><i class="fas fa-trash-alt fs-4 text-danger"></i></a></td>
-                                        </tr>
+                                       <?php customer_list(); ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
@@ -131,7 +124,7 @@ include_once 'functions/authentication.php';
                     <h4 class="modal-title">Add Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="post" novalidate>
+                    <form class="needs-validation" action="functions/customer-create.php" method="post" novalidate>
                         <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required="">
                         <div class="invalid-feedback">
                             Please enter your fullname.
@@ -160,7 +153,8 @@ include_once 'functions/authentication.php';
                     <h4 class="modal-title">Update Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="post" novalidate>
+                    <form class="needs-validation" action="functions/customer-update.php" method="post" novalidate>
+                        <input type="hidden" name="id" id="id">
                         <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required="">
                         <div class="invalid-feedback">
                             Please enter your fullname.
@@ -191,7 +185,10 @@ include_once 'functions/authentication.php';
                 <div class="modal-body">
                     <p>Are you sure you want to remove this customer?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
+                <form action="functions/customer-remove.php" method="post">
+                    <input type="hidden" name="id" id="id">
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Remove</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -208,7 +205,6 @@ include_once 'functions/authentication.php';
     <script src="assets/js/buttons.html5.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/fullcalendar.js"></script>
     <script src="assets/js/index.global.min.js"></script>
     <script src="assets/js/tinymce.min.js"></script>
 </body>
