@@ -2,6 +2,12 @@
 include_once 'functions/menu/offcanva-menu.php';
 include_once 'functions/authentication.php';
 include_once 'functions/tables/datatables.php';
+if (isset($_SESSION['id'])) {
+    $row = customer_info($_SESSION['id']);
+    $fullname = $row['fullname'] ?? '';
+    $address = $row['address'] ?? '';
+    $phone = $row['phone'] ?? '';
+}
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -82,23 +88,16 @@ include_once 'functions/tables/datatables.php';
                                         <table class="table my-0 table-display" id="dataTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Cottage ID</th>
                                                     <th>Cottage Name</th>
-                                                    <th>Rent Date</th>
+                                                    <th>Start Datetime</th>
+                                                    <th>End Datetime</th>
                                                     <th>Type</th>
                                                     <th>Created At</th>
                                                     <th class="text-center">Option</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/logo.png">&nbsp;&lt;id&gt;</td>
-                                                    <td>&lt;cottage&gt;</td>
-                                                    <td>&lt;date&gt;</td>
-                                                    <td>&lt;type&gt;</td>
-                                                    <td>&lt;created_at&gt;</td>
-                                                    <td class="text-center"><a class="mx-1" href="#" data-bs-target="#update" data-bs-toggle="modal"><i class="fas fa-user-edit fs-4 text-warning"></i></a><a class="mx-1" href="#" data-bs-target="#remove" data-bs-toggle="modal"><i class="fas fa-trash-alt fs-4 text-danger"></i></a></td>
-                                                </tr>
+                                                <?php transaction_list(); ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr></tr>
@@ -125,11 +124,14 @@ include_once 'functions/tables/datatables.php';
                                     <form>
                                         <div class="row">
                                             <div class="col">
-                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fullname</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name" readonly=""></div>
+                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fullname</strong></label>
+                                                <input class="form-control" type="text" id="first_name" placeholder="John" name="first_name" readonly="" value="<?php echo $fullname; ?>"></div>
                                             </div>
                                         </div>
-                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Address</strong></label><input class="form-control" type="text" placeholder="Address" name="address" readonly=""></div>
-                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Phone</strong></label><input class="form-control" type="text" placeholder="Contact" name="address" readonly=""></div>
+                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Address</strong></label>
+                                        <input class="form-control" type="text" placeholder="Address" name="address" readonly="" value="<?php echo $address; ?>"></div>
+                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Phone</strong></label>
+                                        <input class="form-control" type="text" placeholder="Contact" name="address" readonly="" value="<?php echo $phone; ?>"></div>
                                     </form>
                                 </div>
                             </div>
@@ -152,15 +154,15 @@ include_once 'functions/tables/datatables.php';
                     <h4 class="modal-title">Select Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Customer</label><select class="selectpicker select" data-live-search="true" name="customer">
+                    <form action="functions/transaction-create.php" method="post">
+                        <div class="mb-1"><label class="form-label">Customer</label><select class="selectpicker select" data-live-search="true" name="id">
                                 <optgroup label="SELECT CUSTOMER">
                                     <?php customers(); ?>
                                 </optgroup>
                             </select></div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                    </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -171,27 +173,29 @@ include_once 'functions/tables/datatables.php';
                     <h4 class="modal-title">Add Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Cottage</label><select class="selectpicker select" data-live-search="true" name="cottage">
+                    <form action="functions/transaction-add.php" method="post">
+                        <div class="mb-1"><label class="form-label">Cottage</label><select class="selectpicker select" data-live-search="true" name="id">
                             <optgroup label="SELECT COTTAGE">
-                                <option value="1" selected="">&lt;cottage&gt;</option>
+                                <?php cotteges(); ?>
                             </optgroup>
                         </select></div>
-                        <div class="mb-1"><label class="form-label">Rent type</label><select class="selectpicker select" data-live-search="true" name="type">
-                                <optgroup label="SELECT TYPE">
-                                    <option value="1" selected="">&lt;type&gt;</option>
-                                </optgroup>
-                            </select></div><div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
-            <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
-        </div>
-    </div>
-</div>
-                    </form>
+                        <div class="mb-1"><label class="form-label">TYPE</label><select class="selectpicker select" data-live-search="true" name="type">
+                            <optgroup label="SELECT TYPE">
+                                <option value="DAY" selected="">DAY</option>
+                                <option value="NIGHT">NIGHT</option>
+                            </optgroup>
+                        </select></div>
+                        <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
+                                    <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -199,31 +203,28 @@ include_once 'functions/tables/datatables.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Update Type</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Update Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form novalidate="" method="post">
-                        <div class="mb-1"><label class="form-label">Cottage</label><select class="selectpicker select" data-live-search="true" name="cottage">
-                            <optgroup label="SELECT COTTAGE">
-                                <option value="1" selected="">&lt;cottage&gt;</option>
+                    <form action="functions/transaction-update.php" method="post">
+                        <input type="hidden" name="id">
+                        <div class="mb-1"><label class="form-label">TYPE</label><select class="form-select" name="type">
+                            <optgroup label="SELECT TYPE">
+                                <option value="DAY" selected="">DAY</option>
+                                <option value="NIGHT">NIGHT</option>
                             </optgroup>
                         </select></div>
-                        <div class="mb-1"><label class="form-label">Rent type</label><select class="selectpicker select" data-live-search="true" name="type">
-                                <optgroup label="SELECT TYPE">
-                                    <option value="1" selected="">&lt;type&gt;</option>
-                                </optgroup>
-                            </select></div>
-                            <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
-                                        <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
-                                    </div>
+                        <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
+                                    <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
                                 </div>
                             </div>
-                    </form>
+                        </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -236,7 +237,10 @@ include_once 'functions/tables/datatables.php';
                 <div class="modal-body">
                     <p>Are you sure you want to remove this User?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
+                <form action="functions/transaction-remove.php" method="post">
+                    <input type="hidden" name="id">
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Remove</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -249,7 +253,7 @@ include_once 'functions/tables/datatables.php';
                 <div class="modal-body">
                     <p>Are you sure you want to cancel this transaction?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Cancel</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><a class="btn btn-danger" type="button" href="functions/transaction-remove.php">Cancel</a></div>
             </div>
         </div>
     </div>
@@ -262,7 +266,7 @@ include_once 'functions/tables/datatables.php';
                 <div class="modal-body">
                     <p>Are you sure you want to proceed this transaction?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><a class="btn btn-primary" type="button" href="functions/transaction-proceed.php">Save</a></div>
             </div>
         </div>
     </div>
@@ -279,7 +283,6 @@ include_once 'functions/tables/datatables.php';
     <script src="assets/js/buttons.html5.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/fullcalendar.js"></script>
     <script src="assets/js/index.global.min.js"></script>
     <script src="assets/js/tinymce.min.js"></script>
 </body>

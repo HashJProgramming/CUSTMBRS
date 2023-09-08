@@ -109,24 +109,23 @@ new DataTable('table.table-display',{
             $('input[name="priceNight"]').val(night);
             console.log(id); 
         });
-      }else if (currentPath.includes("/CUSTMBRS/rents.php")) {
-        $('a[data-bs-target="#return"]').on('click', function() {
+      }else if (currentPath.includes("/CUSTMBRS/rent.php")) {
+        $('a[data-bs-target="#update"]').on('click', function() {
             var id = $(this).data('id');
-            $('input[name="data_id"]').val(id);
-            console.log(id); 
+            var start = $(this).data('start');
+            var end = $(this).data('end');
+            var type = $(this).data('type');
+            $('input[name="id"]').val(id);
+            $('select[name="type"]').val(type);
+            $('input[name="start"]').val(start);
+            $('input[name="end"]').val(end);
+            console.log(id, name, start, end, type); 
         });
-
-        $('a[data-bs-target="#stock-in"]').on('click', function() {
-            var id = $(this).data('id');
-            console.log(id); 
-            $('input[name="data_id"]').val(id);
-        });
-
-        $('a[data-bs-target="#stock-out"]').on('click', function() {
-            var id = $(this).data('id');
-            console.log(id); 
-            $('input[name="data_id"]').val(id);
-        });
+        $('button[data-bs-target="#proceed"]').on('click', function() {
+          var id = $(this).data('id');
+          console.log(id); 
+          $('input[name="id"]').val(id);
+      });
       } else{
         console.log("The URL is neither /customer nor /list");
       }

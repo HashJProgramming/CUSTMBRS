@@ -1,6 +1,8 @@
 <?php
 include_once 'connection.php';
-
+if (session_start() === PHP_SESSION_NONE) {
+    session_start();
+}
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -10,8 +12,6 @@ $stmt->execute([$username]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user && password_verify($password, $user['password'])) {
-
-    session_start();
     $_SESSION['username'] = $username;
     $_SESSION['type'] = $user['type'];
     $_SESSION['id'] = $user['id'];

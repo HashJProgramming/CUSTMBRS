@@ -1,5 +1,6 @@
 <?php
 include_once 'functions/connection.php';
+include_once 'functions/data/get-data.php';
 
 function user_logs(){
     global $db;
@@ -45,19 +46,6 @@ function customer_list(){
     }
 }
 
-function customers(){
-    global $db;
-    $sql = 'SELECT * FROM customers ORDER BY fullname ASC';
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $results = $stmt->fetchAll();
-    $select = false;
-    foreach ($results as $row) {
-        ?>
-        <option value="<?php echo $row['id'] ?>" <?php if (!$select) { echo 'selected'; $select = true; } ?>><?php echo $row['fullname'] ?></option>        
-    <?php
-    }
-}
 
 function staff_list(){
     global $db;
@@ -110,5 +98,45 @@ function cottage_list(){
     </div>
 
     <?php
+    }
+}
+
+function transaction_list(){
+    global $db;
+    $user_id = $_SESSION['id'];
+    
+    $sql = "SELECT * FROM transactions WHERE `user_id` = :user_id AND `status` = 'Pending'";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->execute();
+    $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($transactions as $transaction) {
+        $transaction_id = $transaction['id'];
+
+        $sql = "SELECT r.*, c.name AS cottage_name
+                FROM rentals AS r
+                JOIN cottages AS c ON r.cottage_id = c.id
+                WHERE r.transact_id = :transact_id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':transact_id', $transaction_id);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($results as $row) {
+            ?>
+            <tr>
+                <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">&nbsp;<?php echo $row['cottage_name']; ?></td>
+                <td><?php echo $row['start_datetime']; ?></td>
+                <td><?php echo $row['end_datetime']; ?></td>
+                <td><?php echo $row['type']; ?></td>
+                <td><?php echo $row['created_at']; ?></td>
+                <td class="text-center">
+                    <a class="mx-1" href="#" data-bs-target="#update" data-id="<?php echo $row['id']?>" data-type="<?php echo $row['type']?>" data-start="<?php echo $row['start_datetime']?>" data-end="<?php echo $row['end_datetime']?>" data-bs-toggle="modal"><i class="fas fa-user-edit fs-4 text-warning"></i></a>
+                    <a class="mx-1" href="#" data-bs-target="#remove" data-id="<?php echo $row['id']?>" data-bs-toggle="modal"><i class="fas fa-trash-alt fs-4 text-danger"></i></a>
+                </td>
+            </tr>
+            <?php
+        }
     }
 }

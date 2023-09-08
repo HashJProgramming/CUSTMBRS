@@ -58,7 +58,7 @@
           id INT PRIMARY KEY AUTO_INCREMENT,
           cottage_id INT,
           transact_id INT,
-          price DECIMAL(10,2),
+          type VARCHAR(255),
           start_datetime DATETIME,
           end_datetime DATETIME,
           created_at DATE DEFAULT CURRENT_TIMESTAMP,
