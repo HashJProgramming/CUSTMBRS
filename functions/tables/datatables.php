@@ -146,13 +146,13 @@ function get_top_customers(){
     global $db;
     $sql = "SELECT c.fullname, COUNT(*) AS total FROM transactions t
         JOIN customers c ON t.customer_id = c.id
-        WHERE t.status = 'Pending'
+        WHERE t.status = 'Proceed'
         GROUP BY c.fullname
         ORDER BY total DESC
         LIMIT 3";
     $statement = $db->prepare($sql);
     $statement->execute();
-    $results = $statement->fetchAll(); // Fetch all results
+    $results = $statement->fetchAll();
 
     foreach ($results as $row) {
         ?>
@@ -172,8 +172,9 @@ function get_top_customers(){
 
 function get_top_cottages(){
     global $db;
-    $sql = "SELECT c.name, COUNT(*) AS total FROM rentals r
-        JOIN cottages c ON r.cottage_id = c.id
+    $sql = "SELECT c.name, COUNT(*) AS total FROM transactions t
+        JOIN cottages c ON t.customer_id = c.id
+        WHERE t.status = 'Proceed'
         GROUP BY c.name
         ORDER BY total DESC
         LIMIT 3";
@@ -194,5 +195,53 @@ function get_top_cottages(){
             </div>
         </li>
         <?php
+    }
+}
+
+
+function activity_logs(){
+    global $db;
+    $sql = 'SELECT * FROM logs';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+        ?>
+             <tr>
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['type'] ?></td>
+                <td><?php echo $row['logs'] ?></td>
+                <td><?php echo $row['created_at'] ?></td>
+            </tr>
+    <?php
+    }
+}
+
+function sales_report(){
+    global $db;
+    $sql = "SELECT r.id AS rental_id,
+            r.type as rental_type,
+            c.name AS cottage_name,
+            CASE
+                WHEN r.type = 'day' THEN c.priceDay
+                WHEN r.type = 'night' THEN c.priceNight
+                ELSE 0
+            END AS cottage_price
+        FROM rentals r
+        JOIN cottages c ON r.cottage_id = c.id;";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+        ?>
+            <tr>
+                <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png"><?php echo $row['cottage_name']?></td>
+                <td><?php echo $row['cottage_price']?></td>
+                <td><?php echo $row['r.rental_type']?></td>
+                <td><?php echo $row['r.created_at']?></td>
+            </tr>
+    <?php
     }
 }

@@ -9,7 +9,7 @@ include_once 'functions/tables/datatables.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Calendar - CUSTMBRS</title>
+    <title>Users Logs - CUSTMBRS</title>
     <meta name="description" content="CUSTMBRS - Cottage Usage Scheduling with Transaction Monitoring for a Beach Resort System">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/img/icon.png">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/img/icon.png">
@@ -38,7 +38,7 @@ include_once 'functions/tables/datatables.php';
             <div id="content">
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Calendar</h3>
+                        <h3 class="text-dark mb-0">User Activity Logs</h3>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-xl-3 mb-4">
@@ -46,8 +46,8 @@ include_once 'functions/tables/datatables.php';
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>CURRENT SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales()?></span></span></div>
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TOTAL USERS Logs</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo get_total_user_logs() ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -55,25 +55,12 @@ include_once 'functions/tables/datatables.php';
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres your total customer registered.">
+                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>MONTLY SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales()?></span></span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres your latest customer registered.">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>ANNUAL SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales('annual')?></span></span></div>
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>NEW USERS</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo new_user() ?? 0 ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -82,9 +69,28 @@ include_once 'functions/tables/datatables.php';
                         </div>
                     </div>
                     <div class="card shadow">
-                        <div class="card-header py-3"></div>
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Activity Logs</p>
+                        </div>
                         <div class="card-body">
-                            <div id="calendar"></div>
+                            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0 table-display" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Type</th>
+                                            <th>Logs</th>
+                                            <th>Created At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php activity_logs(); ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,27 +103,7 @@ include_once 'functions/tables/datatables.php';
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 <?php menu(); ?>
-    <div class="modal fade" role="dialog" tabindex="-1" id="report">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Generate Report</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Select Datetime to generate report</p>
-                    <form>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6"><input class="form-control" type="date" name="date_start"></div>
-                                <div class="col-md-6"><input class="form-control" type="date" name="date_end"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Generate</button></div>
-            </div>
-        </div>
-    </div>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
@@ -131,7 +117,6 @@ include_once 'functions/tables/datatables.php';
     <script src="assets/js/buttons.html5.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/fullcalendar.js"></script>
     <script src="assets/js/index.global.min.js"></script>
     <script src="assets/js/tinymce.min.js"></script>
 </body>

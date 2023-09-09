@@ -203,3 +203,12 @@ function get_current_sales(){
     $result = $statement->fetch();
     return number_format($result['total'], 2);
 }
+
+function get_total_user_logs(){
+    global $db;
+    $sql = "SELECT COUNT(*) AS total FROM logs";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetch();
+    return $result['total'] ?? 0;
+}

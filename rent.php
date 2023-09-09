@@ -232,10 +232,10 @@ if (isset($_SESSION['id'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Remove User</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Remove Cottage</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to remove this User?</p>
+                    <p>Are you sure you want to remove this Cottage?</p>
                 </div>
                 <form action="functions/transaction-remove.php" method="post">
                     <input type="hidden" name="id">
@@ -253,7 +253,7 @@ if (isset($_SESSION['id'])) {
                 <div class="modal-body">
                     <p>Are you sure you want to cancel this transaction?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><a class="btn btn-danger" type="button" href="functions/transaction-remove.php">Cancel</a></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><a class="btn btn-danger" type="button" href="functions/transaction-cancel.php">Cancel</a></div>
             </div>
         </div>
     </div>

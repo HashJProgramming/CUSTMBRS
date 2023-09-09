@@ -47,7 +47,7 @@ include_once 'functions/tables/datatables.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>CURRENT SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_current_sales() ?? 0?></span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales()?></span></span></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -60,7 +60,7 @@ include_once 'functions/tables/datatables.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>MONTLY SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales() ?? 0 ?></span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales()?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -73,7 +73,7 @@ include_once 'functions/tables/datatables.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>ANNUAL SALES</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales('annual') ?? 0 ?></span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo get_sales('annual')?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -97,12 +97,7 @@ include_once 'functions/tables/datatables.php';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">Airi Satou</td>
-                                            <td>&lt;address&gt;</td>
-                                            <td>&lt;phone&gt;</td>
-                                            <td>&lt;created_at&gt;</td>
-                                        </tr>
+                                        <?php sales_report(); ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>

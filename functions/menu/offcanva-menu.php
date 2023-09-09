@@ -36,10 +36,29 @@ function menu()
             <div>
                 <hr>
                 <div class="dropdown"><a class="dropdown-toggle link-body-emphasis d-flex align-items-center text-decoration-none" aria-expanded="false" data-bs-toggle="dropdown" role="button"><img class="rounded-circle me-2" alt="" width="32" height="32" src="assets/img/icon.png" style="object-fit: cover;"><strong>Administrator</strong>&nbsp;</a>
-                    <div class="dropdown-menu shadow text-small" data-popper-placement="top-start"><a class="dropdown-item" href="#">Users Logs</a><a class="dropdown-item" href="#">Change Password</a>
+                    <div class="dropdown-menu shadow text-small" data-popper-placement="top-start"><a class="dropdown-item" href="users-logs.php">Users Logs</a><a class="dropdown-item" data-bs-target="#change" data-bs-toggle="modal">Change Password</a>
                         <div class="dropdown-divider"></div><a class="dropdown-item" href="functions/logout.php">Sign out</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="change">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Password</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="functions/change-password.php" method="post">
+                        <div class="my-1"><label class="form-label">Current Password</label><input name="current" class="form-control" type="password" required="" pattern="^(?!\s).*$"></div>
+                        <div class="my-1"><label class="form-label">New Password</label><input name="new" class="form-control" type="password" pattern="^(?!\s).*$" required=""></div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
