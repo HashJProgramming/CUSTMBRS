@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
       initialView: 'dayGridMonth',
       initialDate: new Date(),
       headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
+          left: 'prev,next',
           right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
       },
       events: {

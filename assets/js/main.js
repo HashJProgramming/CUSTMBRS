@@ -127,7 +127,7 @@ new DataTable('table.table-display',{
           $('input[name="id"]').val(id);
       });
       } else{
-        console.log("The URL is neither /customer nor /list");
+        // console.log("Developer: Hash'J ❤️ Programming");
       }
 
 
@@ -142,5 +142,5 @@ new DataTable('table.table-display',{
         console.log(id); 
         $('input[name="id"]').val(id);
     });
-
+    console.log("Developer: Hash'J ❤️ Programming");
 } );
