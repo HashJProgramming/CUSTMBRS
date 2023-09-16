@@ -23,7 +23,7 @@ function cotteges(){
     $select = false;
     foreach ($results as $row) {
         ?>
-        <option value="<?php echo $row['id'] ?>" <?php if (!$select) { echo 'selected'; $select = true; } ?>><?php echo $row['name'] ?></option>        
+        <option value="<?php echo $row['id'] ?>" <?php if (!$select) { echo 'selected'; $select = true; } ?>><?php echo $row['name'].' | '.$row['type'] ?></option>        
     <?php
     }
 }
@@ -138,7 +138,9 @@ function new_cottage(){
     $statement = $db->prepare($sql);
     $statement->execute();
     $result = $statement->fetch();
-    return $result['name'] ?? 'None';
+    $name = $result['name'] ?? 'None';
+    $type = $result['type'] ?? 'None';
+    return $name . ' | ' . $type;
 }
 
 function get_total_users(){

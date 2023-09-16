@@ -2,6 +2,7 @@
 include_once 'connection.php';
 
 $name = $_POST['name'];
+$type = $_POST['type'];
 $day = $_POST['priceDay'];
 $night = $_POST['priceNight'];
 $picture = $_FILES['picture'];
@@ -23,9 +24,10 @@ if ($picture['error'] === UPLOAD_ERR_OK) {
     $upload_path = $upload_dir . $new_filename;
 
     if (move_uploaded_file($picture['tmp_name'], $upload_path)) {
-        $sql = "INSERT INTO cottages (`name`, `picture`, `priceDay`, `priceNight`) VALUES (:name, :picture, :priceDay, :priceNight)";
+        $sql = "INSERT INTO cottages (`name`, `type`, `picture`, `priceDay`, `priceNight`) VALUES (:name, :type, :picture, :priceDay, :priceNight)";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':type', $type);
         $stmt->bindParam(':priceDay', $day);
         $stmt->bindParam(':priceNight', $night);
         $stmt->bindParam(':picture', $upload_path);

@@ -84,13 +84,13 @@ function cottage_list(){
     <div class="col-xl-4">
         <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="functions/<?php echo $row['picture']; ?>">
             <div class="card-body p-4">
-                <p class="text-primary card-text mb-0">Cottage ID: <?php echo $row['id']; ?></p>
+                <p class="text-primary card-text mb-0">Cottage ID: <?php echo $row['id'].' | '.$row['type']; ?></p>
                 <h4 class="card-title"><?php echo $row['name']; ?></h4>
                 <p class="card-text">Price DayTime: ₱<?php echo number_format($row['priceDay'], 2); ?></p>
                 <p class="card-text">Price NightTime: ₱<?php echo number_format($row['priceNight'], 2); ?></p>
                 <div class="d-flex">
                     <a class="btn btn-primary mx-1" href="calendar.php" type="button">View</a>
-                    <button class="btn btn-warning mx-1" type="button" data-bs-target="#update" data-id="<?php echo $row['id']; ?>" data-name="<?php echo $row['name']; ?>" data-day="<?php echo $row['priceDay']; ?>" data-night="<?php echo $row['priceNight']; ?>" data-bs-toggle="modal">Update</button>
+                    <button class="btn btn-warning mx-1" type="button" data-bs-target="#update" data-id="<?php echo $row['id']; ?>" data-name="<?php echo $row['name']; ?>" data-type="<?php echo $row['type']; ?>" data-day="<?php echo $row['priceDay']; ?>" data-night="<?php echo $row['priceNight']; ?>" data-bs-toggle="modal">Update</button>
                     <button class="btn btn-danger mx-1" type="button" data-bs-target="#remove"data-id="<?php echo $row['id']; ?>"  data-bs-toggle="modal">Remove</button>
                 </div>
             </div>
@@ -100,6 +100,48 @@ function cottage_list(){
     <?php
     }
 }
+
+function cottage_available_list($start, $end){
+    global $db;
+    $sql = 'SELECT * FROM cottages';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $cottages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($cottages as $cottage) {
+        $sql = "SELECT * FROM rentals 
+                WHERE `cottage_id` = :cottage_id 
+                AND (:start_datetime BETWEEN `start_datetime` AND `end_datetime`
+                    OR :end_datetime BETWEEN `start_datetime` AND `end_datetime`
+                    OR `start_datetime` BETWEEN :start_datetime AND :end_datetime)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':cottage_id', $cottage['id']);
+        $stmt->bindParam(':start_datetime', $start);
+        $stmt->bindParam(':end_datetime', $end);
+        $stmt->execute();
+        $rental = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$rental) {
+            ?>
+            <div class="col-xl-4">
+                <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="functions/<?php echo $cottage['picture']; ?>">
+                    <div class="card-body p-4">
+                        <p class="text-primary card-text mb-0">Cottage ID: <?php echo $cottage['id'].' | '.$cottage['type']; ?></p>
+                        <h4 class="card-title"><?php echo $cottage['name']; ?></h4>
+                        <p class="card-text">Price DayTime: ₱<?php echo number_format($cottage['priceDay'], 2); ?></p>
+                        <p class="card-text">Price NightTime: ₱<?php echo number_format($cottage['priceNight'], 2); ?></p>
+                        <div class="d-flex">
+                            <!-- <a class="btn btn-primary mx-1" href="calendar.php" type="button">View</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+    }
+
+}
+
+
 
 function transaction_list(){
     global $db;

@@ -2,6 +2,7 @@
 include_once 'connection.php';
 $id = $_POST['id'];
 $name = $_POST['name'];
+$type = $_POST['type'];
 $day = $_POST['priceDay'];
 $night = $_POST['priceNight'];
 $picture = $_FILES['picture'];
@@ -30,9 +31,10 @@ if ($picture['error'] === UPLOAD_ERR_OK) {
     }
 }
 
-$sql = "UPDATE cottages SET `name` = :name, `picture` = :picture, `priceDay` = :priceDay, `priceNight` = :priceNight WHERE `id` = :id";
+$sql = "UPDATE cottages SET `name` = :name, `type` = :type, `picture` = :picture, `priceDay` = :priceDay, `priceNight` = :priceNight WHERE `id` = :id";
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':name', $name);
+$stmt->bindParam(':type', $type);
 $stmt->bindParam(':priceDay', $day);
 $stmt->bindParam(':priceNight', $night);
 $stmt->bindParam(':picture', $upload_path);

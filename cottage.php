@@ -105,9 +105,20 @@ include_once 'functions/tables/datatables.php';
                 </div>
                 <div class="modal-body">
                     <form class="needs-validation" action="functions/cottage-create.php" method="post" enctype="multipart/form-data" novalidate>
-                    <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
+                    <div class="mb-1"><label class="form-label">Cottage No.</label><input class="form-control" type="number" name="name" required="" placeholder="Cottage No.">
                         <div class="invalid-feedback">
-                            Please enter your cottage name.
+                            Please enter your cottage number.
+                        </div>
+                    </div>
+                    <div class="mb-1"><label class="form-label">Type</label>
+                        <select class="selectpicker select" data-live-search="true" name="type">
+                            <optgroup label="SELECT COTTAGE">
+                                <option value="NIPA" selected>NIPA</option> 
+                                <option value="CONCRETE" selected>CONCRETE</option> 
+                            </optgroup>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please enter your cottage type.
                         </div>
                     </div>
                     <div class="mb-1"><label class="form-label">Price Day</label><input class="form-control" type="number" name="priceDay" required="" value="0">
@@ -141,9 +152,20 @@ include_once 'functions/tables/datatables.php';
                 <div class="modal-body">
                     <form class="needs-validation" action="functions/cottage-update.php" method="post" enctype="multipart/form-data" novalidate>
                     <input type="hidden" name="id">
-                    <div class="mb-1"><label class="form-label">Name</label><input class="form-control" type="text" name="name" required="" placeholder="Cottage Name">
+                    <div class="mb-1"><label class="form-label">Cottage No.</label><input class="form-control" type="number" name="name" required="" placeholder="Cottage No.">
                         <div class="invalid-feedback">
-                            Please enter your cottage name.
+                            Please enter your cottage number.
+                        </div>
+                    </div>
+                    <div class="mb-1"><label class="form-label">Type</label>
+                        <select class="selectpicker select" data-live-search="true" name="type">
+                            <optgroup label="SELECT COTTAGE">
+                                <option value="NIPA" selected>NIPA</option> 
+                                <option value="CONCRETE" selected>CONCRETE</option> 
+                            </optgroup>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please enter your cottage type.
                         </div>
                     </div>
                     <div class="mb-1"><label class="form-label">Price Day</label><input class="form-control" type="number" name="priceDay" required="" value="0">

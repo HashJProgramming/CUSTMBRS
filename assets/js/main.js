@@ -101,10 +101,12 @@ new DataTable('table.table-display',{
         $('button[data-bs-target="#update"]').on('click', function() {
             var id = $(this).data('id');
             var name = $(this).data('name');
+            var type = $(this).data('type');
             var day = $(this).data('day');
             var night = $(this).data('night');
             $('input[name="id"]').val(id);
             $('input[name="name"]').val(name);
+            $('select[name="type"]').val(type);
             $('input[name="priceDay"]').val(day);
             $('input[name="priceNight"]').val(night);
             console.log(id); 
