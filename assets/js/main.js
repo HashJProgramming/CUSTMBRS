@@ -121,8 +121,19 @@ new DataTable('table.table-display',{
             $('select[name="type"]').val(type);
             $('input[name="start"]').val(start);
             $('input[name="end"]').val(end);
-            console.log(id, name, start, end, type); 
+            console.log(id, start, end, type); 
         });
+        $('button[data-bs-target="#add"]').on('click', function() {
+          var id = $(this).data('id');
+          var type = $(this).data('type');
+          var start = $(this).data('start');
+          var end = $(this).data('end');
+          $('input[name="id"]').val(id);
+          $('input[name="type"]').val(type);
+          $('input[name="start"]').val(start);
+          $('input[name="end"]').val(end);
+          console.log(start, end, type); 
+      });
         $('button[data-bs-target="#proceed"]').on('click', function() {
           var id = $(this).data('id');
           console.log(id); 

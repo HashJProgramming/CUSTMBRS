@@ -37,7 +37,8 @@ if (isset($_SESSION['id'])) {
             <nav class="navbar navbar-expand-md bg-body py-3 mb-5">
                 <div class="container-fluid"><img src="assets/img/icon.png" width="32"><a class="navbar-brand d-flex align-items-center" href="#"><span>&nbsp; Sere's Point Beach Resort</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-2">
-                        <ul class="navbar-nav ms-auto"></ul><button class="btn btn-light ms-md-2" data-bs-toggle="offcanvas" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#offcanvas-menu" title="Here you can see all the menu list of the site such as (Dashboard, Customers, Rents and etc.).">Menu</button>
+                        <ul class="navbar-nav ms-auto"></ul>
+                        <button class="btn btn-light ms-md-2" data-bs-toggle="offcanvas" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#offcanvas-menu" title="Here you can see all the menu list of the site such as (Dashboard, Customers, Rents and etc.).">Menu</button>
                     </div>
                 </div>
             </nav>
@@ -77,7 +78,8 @@ if (isset($_SESSION['id'])) {
                     <div class="row">
                         <div class="col">
                             <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                                <h3 class="text-dark mb-0"></h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal"><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Add Cottage</a>
+                            <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#search" data-bs-toggle="modal"><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Check Cottage Available</a>
+                                <!-- <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal"><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Add Cottage</a> -->
                             </div>
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -88,7 +90,7 @@ if (isset($_SESSION['id'])) {
                                         <table class="table my-0 table-display" id="dataTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Cottage Name</th>
+                                                    <th>Cottage</th>
                                                     <th>Start Datetime</th>
                                                     <th>End Datetime</th>
                                                     <th>Type</th>
@@ -139,6 +141,26 @@ if (isset($_SESSION['id'])) {
                     </div>
                 </div>
             </div>
+            <div class="container-fluid">
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="text-primary m-0 fw-bold">Cottage List</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                                <?php 
+                                    if (isset($_GET['start']) && isset($_GET['end'])) {
+                                        cottage_available_list($_GET['start'], $_GET['end'], $_GET['type']); 
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © CUTMBRS 2023</span></div>
@@ -174,25 +196,23 @@ if (isset($_SESSION['id'])) {
                 </div>
                 <div class="modal-body">
                     <form action="functions/transaction-add.php" method="post">
-                        <div class="mb-1"><label class="form-label">Cottage</label><select class="selectpicker select" data-live-search="true" name="id">
-                            <optgroup label="SELECT COTTAGE">
-                                <?php cotteges(); ?>
-                            </optgroup>
-                        </select></div>
-                        <div class="mb-1"><label class="form-label">TYPE</label><select class="selectpicker select" data-live-search="true" name="type">
-                            <optgroup label="SELECT TYPE">
-                                <option value="DAY" selected="">DAY</option>
-                                <option value="NIGHT">NIGHT</option>
-                            </optgroup>
-                        </select></div>
+                        <input type="hidden" name="id">
+                        <div class="mb-1">
+                            <label class="form-label">TYPE</label>
+                            <select class="form-select" name="type">
+                                <optgroup label="SELECT TYPE">
+                                    <option value="DAY" selected="">DAY</option>
+                                    <option value="NIGHT">NIGHT</option>
+                                </optgroup>
+                            </select>
+                        </div>
                         <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
-                                    <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
+                                <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
                             </div>
                         </div>
+
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
                 </form>
@@ -208,12 +228,15 @@ if (isset($_SESSION['id'])) {
                 <div class="modal-body">
                     <form action="functions/transaction-update.php" method="post">
                         <input type="hidden" name="id">
-                        <div class="mb-1"><label class="form-label">TYPE</label><select class="form-select" name="type">
-                            <optgroup label="SELECT TYPE">
-                                <option value="DAY" selected="">DAY</option>
-                                <option value="NIGHT">NIGHT</option>
-                            </optgroup>
-                        </select></div>
+                        <div class="mb-1">
+                            <label class="form-label">TYPE</label>
+                            <select class="form-select" name="type">
+                                <optgroup label="SELECT TYPE">
+                                    <option value="DAY" selected="">DAY</option>
+                                    <option value="NIGHT">NIGHT</option>
+                                </optgroup>
+                            </select>
+                        </div>
                         <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
                             <div class="container">
                                 <div class="row">
@@ -267,6 +290,33 @@ if (isset($_SESSION['id'])) {
                     <p>Are you sure you want to proceed this transaction?</p>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><a class="btn btn-primary" type="button" href="functions/transaction-proceed.php">Save</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="search">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Check Cottage Available</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" action="rent.php" method="get" novalidate>
+                        <div class="mb-1"><label class="form-label">TYPE</label><select class="selectpicker select" data-live-search="true" name="type">
+                            <optgroup label="SELECT TYPE">
+                                <option value="NIPA">NIPA</option>
+                                <option value="CONCRETE">CONCRETE</option>
+                            </optgroup>
+                        </select></div>
+                        <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
+                            <div class="row">
+                                <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
+                                <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
+                            </div>
+                        </div>
+                   
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>

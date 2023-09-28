@@ -101,14 +101,15 @@ function cottage_list(){
     }
 }
 
-function cottage_available_list($start, $end){
+function cottage_available_list($start, $end, $type){
     global $db;
-    $sql = 'SELECT * FROM cottages';
+    $sql = 'SELECT * FROM cottages WHERE `type` = :type';
     $stmt = $db->prepare($sql);
+    $stmt->bindParam(':type', $type);
     $stmt->execute();
     $cottages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($cottages as $cottage) {
-        $sql = "SELECT * FROM rentals 
+        $sql = "SELECT * FROM rentals, cottages 
                 WHERE `cottage_id` = :cottage_id 
                 AND (:start_datetime BETWEEN `start_datetime` AND `end_datetime`
                     OR :end_datetime BETWEEN `start_datetime` AND `end_datetime`
@@ -125,12 +126,22 @@ function cottage_available_list($start, $end){
             <div class="col-xl-4">
                 <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="functions/<?php echo $cottage['picture']; ?>">
                     <div class="card-body p-4">
-                        <p class="text-primary card-text mb-0">Cottage ID: <?php echo $cottage['id'].' | '.$cottage['type']; ?></p>
-                        <h4 class="card-title"><?php echo $cottage['name']; ?></h4>
-                        <p class="card-text">Price DayTime: ₱<?php echo number_format($cottage['priceDay'], 2); ?></p>
-                        <p class="card-text">Price NightTime: ₱<?php echo number_format($cottage['priceNight'], 2); ?></p>
-                        <div class="d-flex">
-                            <!-- <a class="btn btn-primary mx-1" href="calendar.php" type="button">View</a> -->
+                        <p class="text-primary card-text mb-0">Cottage ID: <?php echo $cottage['id']; ?></p>
+                        <h4 class="card-title mb-4"><?php echo $cottage['type']; ?></h4>
+                        <p>Price Day: ₱<?php echo number_format($cottage['priceDay'], 2); ?></p>
+                        <p>Price Night: ₱<?php echo number_format($cottage['priceNight'], 2); ?></p>
+                        <div class="container mb-4">
+                            <div class="row">
+                            <div class="col">
+                                <form action="" method="post">
+                                <button class="btn btn-primary mx-1" href="#add" type="button" data-bs-target="#add" data-bs-toggle="modal"
+                                data-id="<?php echo $cottage['id']; ?>"
+                                data-type="<?php echo $cottage['type']; ?>"
+                                data-start="<?php echo $_GET['start']; ?>"
+                                data-end="<?php echo $_GET['end']; ?>"
+                                >Add Cottage</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -263,8 +274,9 @@ function activity_logs(){
 function sales_report(){
     global $db;
     $sql = "SELECT r.id AS rental_id,
-            r.type as rental_type,
+            r.type AS rental_type,
             c.name AS cottage_name,
+            r.created_at AS created_at,
             CASE
                 WHEN r.type = 'day' THEN c.priceDay
                 WHEN r.type = 'night' THEN c.priceNight
@@ -281,8 +293,8 @@ function sales_report(){
             <tr>
                 <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png"><?php echo $row['cottage_name']?></td>
                 <td><?php echo $row['cottage_price']?></td>
-                <td><?php echo $row['r.rental_type']?></td>
-                <td><?php echo $row['r.created_at']?></td>
+                <td><?php echo $row['rental_type']?></td>
+                <td><?php echo $row['created_at']?></td>
             </tr>
     <?php
     }
