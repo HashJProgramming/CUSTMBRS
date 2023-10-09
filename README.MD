@@ -34,6 +34,11 @@ Here you can change the `xampp/htdocs/index.php` to redirect to the `CUSTMBRS` f
 | PHP             | 8.2.4                               |
 | phpMyAdmin      | 5.2.1 (up to date)                   |
 
+## Administrator Credentials
+| Username | Password |
+|----------|----------|
+| admin    | admin    |
+
 
 ## LICENSE
 ```               
