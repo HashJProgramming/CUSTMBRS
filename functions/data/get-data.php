@@ -90,7 +90,7 @@ function get_sales($period = 'monthly') {
         FROM transactions t
         JOIN rentals r ON t.id = r.transact_id
         JOIN cottages co ON r.cottage_id = co.id
-        WHERE t.status = 'Proceed'";
+        WHERE t.status = 'Proceed' AND t.payment_status = 'PAID'";
     
     if ($period === 'monthly') {
         $sql .= " AND DATE_FORMAT(t.created_at, '%Y-%m') = DATE_FORMAT(CURRENT_DATE, '%Y-%m')";

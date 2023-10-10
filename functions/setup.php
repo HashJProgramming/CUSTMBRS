@@ -48,6 +48,7 @@
               customer_id int,
               user_id int,
               status VARCHAR(255),
+              payment_status VARCHAR(255),
               created_at DATE DEFAULT CURRENT_TIMESTAMP,
               FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
               FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

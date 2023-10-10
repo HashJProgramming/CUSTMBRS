@@ -38,7 +38,7 @@ include_once 'functions/tables/datatables.php';
             <div id="content">
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Sales Report</h3>
+                        <h3 class="text-dark mb-0">Rentals Management</h3>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-xl-3 mb-4">
@@ -93,12 +93,13 @@ include_once 'functions/tables/datatables.php';
                                             <th>Cottage</th>
                                             <th>Price</th>
                                             <th>Type</th>
-                                            <th>Payment Status</th>
+                                            <th>Status</th>
                                             <th>Created At</th>
+                                            <th class="text-center">Option</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php sales_report(); ?>
+                                        <?php rentals_list(); ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
@@ -117,24 +118,37 @@ include_once 'functions/tables/datatables.php';
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 <?php menu(); ?>
-    <div class="modal fade" role="dialog" tabindex="-1" id="report">
+    <div class="modal fade" role="dialog" tabindex="-1" id="paid">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Generate Report</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Payment Status</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Select Datetime to generate report</p>
-                    <form>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6"><input class="form-control" type="date" name="date_start"></div>
-                                <div class="col-md-6"><input class="form-control" type="date" name="date_end"></div>
-                            </div>
-                        </div>
-                    </form>
+                    <p>Are you sure you want to mark this as paid?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Generate</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                <form action="functions/mark-paid.php" method="post">
+                    <input type="hidden" name="id">
+                    <button class="btn btn-primary" type="submit">Mark Paid</button>
+                </form></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="cancel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rental Cancel</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel this rental?</p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                <form action="functions/rental-cancel.php" method="post">
+                    <input type="hidden" name="id">
+                    <button class="btn btn-primary" type="submit">Cancel</button>
+                </form></div>
             </div>
         </div>
     </div>
@@ -153,6 +167,18 @@ include_once 'functions/tables/datatables.php';
     <script src="assets/js/main.js"></script>
     <script src="assets/js/index.global.min.js"></script>
     <script src="assets/js/tinymce.min.js"></script>
+    <script>
+        $('button[data-bs-target="#paid"]').on('click', function() {
+          var id = $(this).data('id');
+          $('input[name="id"]').val(id);
+          console.log(id); 
+      });
+      $('button[data-bs-target="#cancel"]').on('click', function() {
+          var id = $(this).data('id');
+          $('input[name="id"]').val(id);
+          console.log(id); 
+      });
+    </script>
 </body>
 
 </html>

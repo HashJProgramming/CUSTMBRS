@@ -277,13 +277,15 @@ function sales_report(){
             r.type AS rental_type,
             c.name AS cottage_name,
             r.created_at AS created_at,
+            t.payment_status AS payment_status,
             CASE
                 WHEN r.type = 'day' THEN c.priceDay
                 WHEN r.type = 'night' THEN c.priceNight
                 ELSE 0
             END AS cottage_price
         FROM rentals r
-        JOIN cottages c ON r.cottage_id = c.id;";
+        JOIN cottages c ON r.cottage_id = c.id
+        JOIN `transactions` t ON r.transact_id = t.id;";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $results = $stmt->fetchAll();
@@ -294,7 +296,47 @@ function sales_report(){
                 <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png"><?php echo $row['cottage_name']?></td>
                 <td><?php echo $row['cottage_price']?></td>
                 <td><?php echo $row['rental_type']?></td>
+                <td><?php echo $row['payment_status']?></td>
                 <td><?php echo $row['created_at']?></td>
+            </tr>
+    <?php
+    }
+}
+
+
+function rentals_list(){
+    global $db;
+    $sql = "SELECT r.id AS rental_id,
+            r.type AS rental_type,
+            c.name AS cottage_name,
+            r.created_at AS created_at,
+            t.payment_status AS payment_status,
+            t.id AS transaction_id,
+            CASE
+                WHEN r.type = 'day' THEN c.priceDay
+                WHEN r.type = 'night' THEN c.priceNight
+                ELSE 0
+            END AS cottage_price
+        FROM rentals r
+        JOIN cottages c ON r.cottage_id = c.id
+        JOIN `transactions` t ON r.transact_id = t.id
+        WHERE t.payment_status = 'UNPAID';";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+        ?>
+            <tr>
+                <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png"><?php echo $row['cottage_name']?></td>
+                <td><?php echo $row['cottage_price']?></td>
+                <td><?php echo $row['rental_type']?></td>
+                <td><?php echo $row['payment_status']?></td>
+                <td><?php echo $row['created_at']?></td>
+                <td class="text-center">
+                    <button class="btn btn-info mx-1" href="#" data-bs-target="#paid" data-id="<?php echo $row['transaction_id']?>" data-bs-toggle="modal">Mark Paid</button>
+                    <button class="btn btn-danger mx-1" href="#" data-bs-target="#cancel" data-id="<?php echo $row['transaction_id']?>" data-bs-toggle="modal">Cancel</button>
+                </td>
             </tr>
     <?php
     }

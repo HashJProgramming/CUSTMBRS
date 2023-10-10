@@ -26,7 +26,7 @@ if($result['total'] == 0){
     exit;
 }
 
-$sql = "UPDATE `transactions` SET `status` = 'Proceed' WHERE id = :id";
+$sql = "UPDATE `transactions` SET `status` = 'Proceed', `payment_status` = 'UNPAID' WHERE id = :id";
 $statement = $db->prepare($sql);
 $statement->bindParam(':id', $id);
 $statement->execute();
