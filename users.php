@@ -113,22 +113,22 @@ include_once 'functions/tables/datatables.php';
                 </div>
                 <div class="modal-body">
                     <form class="needs-validation" action="functions/staff-create.php" method="post" novalidate>
-                        <div class="mb-1"><label class="form-label">Username</label><input class="form-control" type="text" name="username" required="">
+                        <div class="mb-1"><label class="form-label">Username</label><input class="form-control" type="text" name="username" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your username.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Password</label><input class="form-control" type="password" name="password" required="">
+                        <div class="mb-1"><label class="form-label">Password</label><input class="form-control" type="password" name="password" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your password.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required="">
+                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your address.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required="">
+                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" pattern="[0-9]+" minlength="11" maxlength="11" required="">
                         <div class="invalid-feedback">
                             Please enter your phone number.
                         </div>
@@ -149,22 +149,22 @@ include_once 'functions/tables/datatables.php';
                 <div class="modal-body">
                     <form class="needs-validation" action="functions/staff-update.php" method="post" novalidate>
                         <input type="hidden" name="id">
-                        <div class="mb-1"><label class="form-label">Username</label><input class="form-control" type="text" name="username" required="">
+                        <div class="mb-1"><label class="form-label">Username</label><input class="form-control" type="text" name="username" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your username.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Password</label><input class="form-control" type="password" name="password" required="">
+                        <div class="mb-1"><label class="form-label">Password</label><input class="form-control" type="password" name="password" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your password.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required="">
+                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your address.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required="">
+                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" pattern="[0-9]+" minlength="11" maxlength="11" required="">
                         <div class="invalid-feedback">
                             Please enter your phone number.
                         </div>

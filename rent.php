@@ -91,10 +91,9 @@ if (isset($_SESSION['id'])) {
                                             <thead>
                                                 <tr>
                                                     <th>Cottage</th>
-                                                    <th>Start Datetime</th>
-                                                    <th>End Datetime</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
                                                     <th>Type</th>
-                                                    <th>Created At</th>
                                                     <th class="text-center">Option</th>
                                                 </tr>
                                             </thead>
@@ -206,13 +205,8 @@ if (isset($_SESSION['id'])) {
                                 </optgroup>
                             </select>
                         </div>
-                        <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
-                            <div class="row">
-                                <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
-                                <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
-                            </div>
-                        </div>
-
+                        <input class="form-control" name="start" required type="hidden" value="<?= $_GET['start']?>"/>
+                        <input class="form-control" name="end" required type="hidden" value="<?= $_GET['end']?>"/>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
                 </form>
@@ -240,8 +234,8 @@ if (isset($_SESSION['id'])) {
                         <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
-                                    <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
+                                    <div class="col-md-6"><input class="form-control" name="start" required type="date" /></div>
+                                    <div class="col-md-6"><input class="form-control" name="end" required type="date" /></div>
                                 </div>
                             </div>
                         </div>
@@ -309,8 +303,8 @@ if (isset($_SESSION['id'])) {
                         </select></div>
                         <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
                             <div class="row">
-                                <div class="col-md-6"><input class="form-control" name="start" required type="datetime-local" /></div>
-                                <div class="col-md-6"><input class="form-control" name="end" required type="datetime-local" /></div>
+                                <div class="col-md-6"><input class="form-control" name="start" required type="date" /></div>
+                                <div class="col-md-6"><input class="form-control" name="end" required type="date" /></div>
                             </div>
                         </div>
                    

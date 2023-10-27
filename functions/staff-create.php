@@ -6,14 +6,15 @@ $password = $_POST['password'];
 $address = $_POST['address'];
 $phone = $_POST['phone'];
 
-$sql = "SELECT * FROM users WHERE username = :username";
+$sql = "SELECT * FROM users WHERE username = :username OR phone = :phone";
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':username', $username);
+$stmt->bindParam(':phone', $phone);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
-    header('Location: ../users.php?type=error&message='.$username.' is already exist');
-    exit;
+    header('Location: ../users.php?type=error&message='.$username.' or '.$phone.' is already exist');
+    exit();
 }
 
 $sql = "INSERT INTO users (`username`, `password`, `address`, `phone`, `type`) VALUES (:username, :password, :address, :phone, 'staff')";

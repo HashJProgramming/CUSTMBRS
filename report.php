@@ -93,6 +93,8 @@ include_once 'functions/tables/datatables.php';
                                             <th>Cottage</th>
                                             <th>Price</th>
                                             <th>Type</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
                                             <th>Payment Status</th>
                                             <th>Created At</th>
                                         </tr>

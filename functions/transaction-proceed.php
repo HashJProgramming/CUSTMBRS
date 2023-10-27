@@ -23,7 +23,7 @@ if (session_start() === PHP_SESSION_NONE) {
    
 if($result['total'] == 0){
     header("Location: ../rent.php?type=error&message=Please add cottage to rent first.");
-    exit;
+    exit();
 }
 
 $sql = "UPDATE `transactions` SET `status` = 'Proceed', `payment_status` = 'UNPAID' WHERE id = :id";

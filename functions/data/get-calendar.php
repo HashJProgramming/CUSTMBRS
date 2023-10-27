@@ -14,7 +14,7 @@ $results = $stmt->fetchAll();
 
 foreach ($results as $row) {
     $event = array(
-        'title' => $row['cottage_name'].' | '.$row['fullname'],
+        'title' => '#'.$row['cottage_name'].' | '.$row['fullname']. ' 📆Start - '.$row['start_datetime']. ' 📆End - '.$row['end_datetime'],
         'start' => $row['start_datetime'],
         'end' => $row['end_datetime']
     );

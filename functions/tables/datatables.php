@@ -13,7 +13,7 @@ function user_logs(){
     foreach ($results as $row) {
         ?>
              <tr>
-                <td><?php echo $row['id']; ?></td>
+                <td>#<?php echo $row['id']; ?></td>
                 <td><?php echo $row['type'] ?></td>
                 <td><?php echo $row['logs'] ?></td>
                 <td><?php echo $row['created_at'] ?></td>
@@ -37,7 +37,7 @@ function customer_list(){
                 <td><?php echo $row['address'] ?></td>
                 <td><?php echo $row['created_at'] ?></td>
                 <td class="text-center">
-                    <a data-bss-tooltip="" class="mx-1" href="profile.php?id=<?php echo $row['id']?>" title="Here you can see the customer transactions."><i class="far fa-eye text-primary" style="font-size: 20px;"></i></a>
+                    
                     <a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" data-id="<?php echo $row['id']?>" data-fullname="<?php echo $row['fullname']?>" data-address="<?php echo $row['address']?>" data-phone="<?php echo $row['phone']?>" title="Here you can update the customer Information."><i class="far fa-edit text-warning" style="font-size: 20px;"></i></a>
                     <a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#remove" data-id="<?php echo $row['id']?>" title="Here you can remove the customer."><i class="far fa-trash-alt text-danger" style="font-size: 20px;"></i></a>
                 </td>
@@ -124,7 +124,8 @@ function cottage_available_list($start, $end, $type){
         if (!$rental) {
             ?>
             <div class="col-xl-4">
-                <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="functions/<?php echo $cottage['picture']; ?>">
+                <div class="card">
+                    <img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="functions/<?php echo $cottage['picture']; ?>">
                     <div class="card-body p-4">
                         <p class="text-primary card-text mb-0">Cottage ID: <?php echo $cottage['id']; ?></p>
                         <h4 class="card-title mb-4"><?php echo $cottage['type']; ?></h4>
@@ -132,15 +133,16 @@ function cottage_available_list($start, $end, $type){
                         <p>Price Night: ₱<?php echo number_format($cottage['priceNight'], 2); ?></p>
                         <div class="container mb-4">
                             <div class="row">
-                            <div class="col">
-                                <form action="" method="post">
-                                <button class="btn btn-primary mx-1" href="#add" type="button" data-bs-target="#add" data-bs-toggle="modal"
-                                data-id="<?php echo $cottage['id']; ?>"
-                                data-type="<?php echo $cottage['type']; ?>"
-                                data-start="<?php echo $_GET['start']; ?>"
-                                data-end="<?php echo $_GET['end']; ?>"
-                                >Add Cottage</button>
-                                </form>
+                                <div class="col">
+                                    <form action="" method="post">
+                                    <button class="btn btn-primary mx-1" href="#add" type="button" data-bs-target="#add" data-bs-toggle="modal"
+                                    data-id="<?php echo $cottage['id']; ?>"
+                                    data-type="<?php echo $cottage['type']; ?>"
+                                    data-start="<?php echo $_GET['start']; ?>"
+                                    data-end="<?php echo $_GET['end']; ?>"
+                                    >Add Cottage</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -179,11 +181,10 @@ function transaction_list(){
         foreach ($results as $row) {
             ?>
             <tr>
-                <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">&nbsp;<?php echo $row['cottage_name']; ?></td>
+                <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">#<?php echo $row['cottage_name']; ?></td>
                 <td><?php echo $row['start_datetime']; ?></td>
                 <td><?php echo $row['end_datetime']; ?></td>
                 <td><?php echo $row['type']; ?></td>
-                <td><?php echo $row['created_at']; ?></td>
                 <td class="text-center">
                     <a class="mx-1" href="#" data-bs-target="#update" data-id="<?php echo $row['id']?>" data-type="<?php echo $row['type']?>" data-start="<?php echo $row['start_datetime']?>" data-end="<?php echo $row['end_datetime']?>" data-bs-toggle="modal"><i class="fas fa-user-edit fs-4 text-warning"></i></a>
                     <a class="mx-1" href="#" data-bs-target="#remove" data-id="<?php echo $row['id']?>" data-bs-toggle="modal"><i class="fas fa-trash-alt fs-4 text-danger"></i></a>
@@ -262,7 +263,7 @@ function activity_logs(){
     foreach ($results as $row) {
         ?>
              <tr>
-                <td><?php echo $row['id']; ?></td>
+                <td>#<?php echo $row['id']; ?></td>
                 <td><?php echo $row['type'] ?></td>
                 <td><?php echo $row['logs'] ?></td>
                 <td><?php echo $row['created_at'] ?></td>
@@ -277,6 +278,8 @@ function sales_report(){
             r.type AS rental_type,
             c.name AS cottage_name,
             r.created_at AS created_at,
+            r.start_datetime AS startdate,
+            r.end_datetime AS enddate,
             t.payment_status AS payment_status,
             CASE
                 WHEN r.type = 'day' THEN c.priceDay
@@ -285,7 +288,8 @@ function sales_report(){
             END AS cottage_price
         FROM rentals r
         JOIN cottages c ON r.cottage_id = c.id
-        JOIN `transactions` t ON r.transact_id = t.id;";
+        JOIN `transactions` t ON r.transact_id = t.id
+        WHERE status = 'Proceed';";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $results = $stmt->fetchAll();
@@ -293,9 +297,11 @@ function sales_report(){
     foreach ($results as $row) {
         ?>
             <tr>
-                <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png"><?php echo $row['cottage_name']?></td>
+                <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">#<?php echo $row['cottage_name']?></td>
                 <td><?php echo $row['cottage_price']?></td>
                 <td><?php echo $row['rental_type']?></td>
+                <td><?php echo $row['startdate']?></td>
+                <td><?php echo $row['enddate']?></td>
                 <td><?php echo $row['payment_status']?></td>
                 <td><?php echo $row['created_at']?></td>
             </tr>
@@ -309,9 +315,13 @@ function rentals_list(){
     $sql = "SELECT r.id AS rental_id,
             r.type AS rental_type,
             c.name AS cottage_name,
+            r.start_datetime AS startdate,
+            r.end_datetime AS enddate,
             r.created_at AS created_at,
+            r.amount AS amount,
             t.payment_status AS payment_status,
             t.id AS transaction_id,
+            u.fullname AS customer_name,
             CASE
                 WHEN r.type = 'day' THEN c.priceDay
                 WHEN r.type = 'night' THEN c.priceNight
@@ -320,21 +330,35 @@ function rentals_list(){
         FROM rentals r
         JOIN cottages c ON r.cottage_id = c.id
         JOIN `transactions` t ON r.transact_id = t.id
-        WHERE t.payment_status = 'UNPAID';";
+        JOIN `customers` u ON t.customer_id = u.id
+        WHERE t.payment_status = 'UNPAID' OR t.payment_status = 'PARTIALLY PAID';";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $results = $stmt->fetchAll();
 
     foreach ($results as $row) {
+        $balance = $row['amount'] - $row['cottage_price'];
         ?>
             <tr>
-                <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png"><?php echo $row['cottage_name']?></td>
+                <td class="sorting_1"><img class="rounded-circle me-2" width="30" height="30" src="assets/img/icon.png">#<?php echo $row['cottage_name']?></td>
+                <td>#<?php echo $row['transaction_id']?></td>
+                <td><?php echo $row['customer_name']?></td>
                 <td><?php echo $row['cottage_price']?></td>
+                <td><?php echo $balance?></td>
                 <td><?php echo $row['rental_type']?></td>
+                <td><?php echo $row['startdate']?></td>
+                <td><?php echo $row['enddate']?></td>
                 <td><?php echo $row['payment_status']?></td>
                 <td><?php echo $row['created_at']?></td>
                 <td class="text-center">
-                    <button class="btn btn-info mx-1" href="#" data-bs-target="#paid" data-id="<?php echo $row['transaction_id']?>" data-bs-toggle="modal">Mark Paid</button>
+                    <button class="btn btn-success mx-1" href="#" data-bs-target="#paid" data-id="<?php echo $row['transaction_id']?>" data-bs-toggle="modal">Mark Paid</button>
+                    <?php
+                        if ($balance < 0){
+                            ?>
+                                <button class="btn btn-warning mx-1" href="#" data-bs-target="#partiallypaid" data-id="<?php echo $row['rental_id']?>" data-transaction="<?php echo $row['transaction_id']?>" data-price="<?php echo $row['cottage_price']?>" data-bs-toggle="modal">Mark Partially Paid</button>
+                            <?php
+                        }
+                    ?>
                     <button class="btn btn-danger mx-1" href="#" data-bs-target="#cancel" data-id="<?php echo $row['transaction_id']?>" data-bs-toggle="modal">Cancel</button>
                 </td>
             </tr>

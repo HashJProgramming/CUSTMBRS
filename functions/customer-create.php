@@ -11,8 +11,8 @@ $stmt->bindParam(':phone', $phone);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
-    header('Location: ../customer.php?type=error&message='.$fullname.' is already exist');
-    exit;
+    header('Location: ../customer.php?type=error&message='.$fullname.' or '.$phone.' is already exist');
+    exit();
 }
 
 $sql = "INSERT INTO customers (fullname, address, phone) VALUES (:fullname, :address, :phone)";

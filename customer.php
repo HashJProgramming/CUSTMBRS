@@ -125,17 +125,17 @@ include_once 'functions/tables/datatables.php';
                 </div>
                 <div class="modal-body">
                     <form class="needs-validation" action="functions/customer-create.php" method="post" novalidate>
-                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required="">
+                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your fullname.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required="">
+                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your address.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required="">
+                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" pattern="[0-9]+" minlength="11" maxlength="11" required="">
                         <div class="invalid-feedback">
                             Please enter your phone number.
                         </div>
@@ -155,17 +155,17 @@ include_once 'functions/tables/datatables.php';
                 <div class="modal-body">
                     <form class="needs-validation" action="functions/customer-update.php" method="post" novalidate>
                         <input type="hidden" name="id" id="id">
-                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" required="">
+                        <div class="mb-1"><label class="form-label">Fullname</label><input class="form-control" type="text" name="fullname" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your fullname.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" required="">
+                        <div class="mb-1"><label class="form-label">Address</label><input class="form-control" type="text" name="address" pattern="^(?![\s.]).*$" required="">
                         <div class="invalid-feedback">
                             Please enter your address.
                         </div>
                     </div>
-                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" required="">
+                        <div class="mb-1"><label class="form-label">Phone</label><input class="form-control" type="text" name="phone" pattern="[0-9]+" minlength="11" maxlength="11" required="">
                         <div class="invalid-feedback">
                             Please enter your phone number.
                         </div>

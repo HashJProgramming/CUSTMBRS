@@ -42,6 +42,8 @@ include_once 'functions/tables/datatables.php';
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xl-3 mb-4">
+                        <a href="report.php" class="text-decoration-none">
+
                             <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
@@ -53,8 +55,11 @@ include_once 'functions/tables/datatables.php';
                                     </div>
                                 </div>
                             </div>
+                        </a>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
+                        <a href="report.php" class="text-decoration-none">
+                            
                             <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your annual earnings.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
@@ -66,8 +71,11 @@ include_once 'functions/tables/datatables.php';
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
+                        <a href="customer.php" class="text-decoration-none">
+                            
                             <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres your total customer registered.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
@@ -79,8 +87,11 @@ include_once 'functions/tables/datatables.php';
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
+                        <a href="customer.php" class="text-decoration-none">
+                            
                             <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres your latest customer registered.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
@@ -92,6 +103,7 @@ include_once 'functions/tables/datatables.php';
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
                     </div>
                     <div class="row">

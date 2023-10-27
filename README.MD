@@ -20,7 +20,7 @@ Here you can change the `xampp/htdocs/index.php` to redirect to the `CUSTMBRS` f
         }
         $uri .= $_SERVER['HTTP_HOST'];
         header('Location: '.$uri.'/CUSTMBRS/');
-        exit;
+        exit();
     ?>
 ```
 

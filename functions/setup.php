@@ -61,8 +61,9 @@
           cottage_id INT,
           transact_id INT,
           type VARCHAR(255),
-          start_datetime DATETIME,
-          end_datetime DATETIME,
+          start_datetime DATE,
+          end_datetime DATE,
+          amount DOUBLE,
           created_at DATE DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (cottage_id) REFERENCES cottages(id) ON DELETE CASCADE,
           FOREIGN KEY (transact_id) REFERENCES transactions(id) ON DELETE CASCADE

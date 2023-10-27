@@ -12,8 +12,12 @@ try {
   
     $current_timestamp = time();
     $start_timestamp = strtotime($start);
-    $end_timestamp = strtotime($end);
-
+    if ($type === 'NIGHT') {
+        $end_timestamp = strtotime($start . ' +1 day');
+    } else {
+        $end_timestamp = strtotime($start);
+    }
+    $end_date = date('Y-m-d', $end_timestamp);
     $sql = "SELECT * FROM transactions WHERE `user_id` = :user_id AND `status` = 'Pending'";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':user_id', $user_id);
@@ -36,22 +40,22 @@ try {
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':cottage_id', $cottage_id);
     $stmt->bindParam(':start_datetime', $start);
-    $stmt->bindParam(':end_datetime', $end);
+    $stmt->bindParam(':end_datetime', $end_date);
     $stmt->execute();
     $rental = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($rental) {
         header('Location: ../rent.php?type=error&message=Cottage is already rented on the selected date');
-        exit;
+        exit();
     }
 
     if ($start_timestamp < $current_timestamp) {
         header('Location: ../rent.php?type=error&message=Start date must be greater than current date');
-        exit;
+        exit();
     }
     if ($end_timestamp < $current_timestamp) {
         header('Location: ../rent.php?type=error&message=End date must be greater than current date');
-        exit;
+        exit();
     }
 
     if (!$transaction) {
@@ -64,7 +68,7 @@ try {
     $stmt->bindParam(':transact_id', $transaction_id);
     $stmt->bindParam(':types', $type);
     $stmt->bindParam(':start_datetime', $start);
-    $stmt->bindParam(':end_datetime', $end);
+    $stmt->bindParam(':end_datetime', $end_date);
     $stmt->execute();
 
     generate_logs('Add Cottage', $user_id, 'Added new rental');

@@ -90,9 +90,14 @@ include_once 'functions/tables/datatables.php';
                                 <table class="table my-0 table-display" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Cottage</th>
+                                            <th>Cottage #</th>
+                                            <th>Transaction #</th>
+                                            <th>Customer</th>
                                             <th>Price</th>
+                                            <th>Balance</th>
                                             <th>Type</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
                                             <th>Status</th>
                                             <th>Created At</th>
                                             <th class="text-center">Option</th>
@@ -135,6 +140,28 @@ include_once 'functions/tables/datatables.php';
             </div>
         </div>
     </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="partiallypaid">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Payment Status</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="functions/mark-partiallypaid.php" method="post">
+                    <div class="mb-1">
+                        <label class="form-label">Partial Amount</label>
+                        <input class="form-control" type="number" name="amount" required placeholder="Amount" min="1" value="1">
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                    <input type="hidden" name="id">
+                    <input type="hidden" name="price">
+                    <input type="hidden" name="transaction">
+                    <button class="btn btn-primary" type="submit">Mark Partially Paid</button>
+                </form></div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" role="dialog" tabindex="-1" id="cancel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -171,6 +198,15 @@ include_once 'functions/tables/datatables.php';
         $('button[data-bs-target="#paid"]').on('click', function() {
           var id = $(this).data('id');
           $('input[name="id"]').val(id);
+          console.log(id); 
+      });
+      $('button[data-bs-target="#partiallypaid"]').on('click', function() {
+          var id = $(this).data('id');
+          var price = $(this).data('price');
+          var transaction = $(this).data('transaction');
+          $('input[name="id"]').val(id);
+          $('input[name="price"]').val(price);
+          $('input[name="transaction"]').val(transaction);
           console.log(id); 
       });
       $('button[data-bs-target="#cancel"]').on('click', function() {

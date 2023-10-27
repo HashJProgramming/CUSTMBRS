@@ -14,7 +14,7 @@ $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
     header('Location: ../cottage.php?type=error&message=' . $name . ' is already exist');
-    exit;
+    exit();
 }
 
 if ($picture['error'] === UPLOAD_ERR_OK) {
@@ -35,13 +35,13 @@ if ($picture['error'] === UPLOAD_ERR_OK) {
 
         generate_logs('Adding cottage', $name . '| New cottage was added');
         header('Location: ../cottage.php?type=success&message=New cottage was added successfully');
-        exit;
+        exit();
     } else {
         header('Location: ../cottage.php?type=error&message=Error uploading the image');
-        exit;
+        exit();
     }
 } else {
     header('Location: ../cottage.php?type=error&message=Image upload failed');
-    exit;
+    exit();
 }
 ?>
