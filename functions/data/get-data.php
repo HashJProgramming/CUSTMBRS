@@ -86,6 +86,7 @@ function get_sales($period = 'monthly') {
     $sql = "SELECT SUM(CASE
         WHEN r.type = 'day' THEN co.priceDay
         WHEN r.type = 'night' THEN co.priceNight
+        WHEN r.type = 'package' THEN co.pricePackage
         ELSE 0 
         END) AS total
         FROM transactions t
