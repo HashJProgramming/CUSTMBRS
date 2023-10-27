@@ -127,15 +127,15 @@ function cottage_available_list($start, $end, $type){
                 <div class="card">
                     <img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="functions/<?php echo $cottage['picture']; ?>">
                     <div class="card-body p-4">
-                        <p class="text-primary card-text mb-0">Cottage ID: <?php echo $cottage['id']; ?></p>
-                        <h4 class="card-title mb-4"><?php echo $cottage['type']; ?></h4>
-                        <p>Price Day: ₱<?php echo number_format($cottage['priceDay'], 2); ?></p>
-                        <p>Price Night: ₱<?php echo number_format($cottage['priceNight'], 2); ?></p>
+                        <p class="text-primary card-text mb-0">Cottage ID: <?php echo $cottage['id']; ?> | <?php echo $cottage['type']; ?></p>
+                        <p class="card-text mb-1">Price Day: ₱<?php echo number_format($cottage['priceDay'], 2); ?></p>
+                        <p class="card-text mb-1">Price Night: ₱<?php echo number_format($cottage['priceNight'], 2); ?></p>
+                        <p>Price Package: ₱<?php echo number_format($cottage['pricePackage'], 2); ?></p>
                         <div class="container mb-4">
                             <div class="row">
                                 <div class="col">
                                     <form action="" method="post">
-                                    <button class="btn btn-primary mx-1" href="#add" type="button" data-bs-target="#add" data-bs-toggle="modal"
+                                    <button class="btn btn-primary w-100" href="#add" type="button" data-bs-target="#add" data-bs-toggle="modal"
                                     data-id="<?php echo $cottage['id']; ?>"
                                     data-type="<?php echo $cottage['type']; ?>"
                                     data-start="<?php echo $_GET['start']; ?>"
