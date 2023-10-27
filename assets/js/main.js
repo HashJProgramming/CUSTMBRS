@@ -104,11 +104,13 @@ new DataTable('table.table-display',{
             var type = $(this).data('type');
             var day = $(this).data('day');
             var night = $(this).data('night');
+            var package = $(this).data('package');
             $('input[name="id"]').val(id);
             $('input[name="name"]').val(name);
             $('select[name="type"]').val(type);
             $('input[name="priceDay"]').val(day);
             $('input[name="priceNight"]').val(night);
+            $('input[name="pricePackage"]').val(package);
             console.log(id); 
         });
       }else if (currentPath.includes("/CUSTMBRS/rent.php")) {

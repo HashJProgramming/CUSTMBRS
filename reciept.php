@@ -6,6 +6,7 @@ $id = $_GET['id'];
 $sql = "SELECT SUM(CASE
     WHEN r.type = 'day' THEN co.priceDay
     WHEN r.type = 'night' THEN co.priceNight
+    WHEN r.type = 'package' THEN co.pricePackage
     ELSE 0 
 END) AS total,
 c.fullname 
@@ -29,6 +30,7 @@ function getItems(){
     CASE
         WHEN r.type = 'day' THEN c.priceDay
         WHEN r.type = 'night' THEN c.priceNight
+        WHEN r.type = 'package' THEN c.pricePackage
         ELSE 0 
     END AS price
     FROM rentals AS r
@@ -47,7 +49,7 @@ function getItems(){
             <tr class="font-monospace" style="font-size: 10px;">
                 <td class="font-monospace" style="font-size: 10px;">Cottage:&nbsp;<strong><?php echo $row['cottage_name'] ?></strong></td>
                 <td class="font-monospace text-end" style="font-size: 10px;"></td>
-                <td class="font-monospace text-center" style="font-size: 10px;"><strong>[<?php echo $row['start_datetime'] ?>] - [<?php echo $row['end_datetime'] ?>] |</strong>&nbsp;<?php echo $days ?> DAYS</td>
+                <td class="font-monospace text-center" style="font-size: 10px;"><strong>[<?php echo $row['start_datetime'] ?>] - [<?php echo $row['end_datetime'] ?>] | </strong>&nbsp;<?php echo $days ?> DAYS | <?php echo $row['type'] ?></td>
                 <td class="font-monospace text-end" style="font-size: 10px;"><strong>₱<?php echo number_format($row['price'], 2) ?></strong></td>
             </tr>
         <?php

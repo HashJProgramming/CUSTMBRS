@@ -14,8 +14,10 @@ try {
     $start_timestamp = strtotime($start);
     if ($type === 'NIGHT') {
         $end_timestamp = strtotime($start . ' +1 day');
-    } else {
+    } else if ($type === 'DAY'){
         $end_timestamp = strtotime($start);
+    }else{
+        $end_timestamp = strtotime($end);
     }
     $end_date = date('Y-m-d', $end_timestamp);
     $sql = "SELECT * FROM transactions WHERE `user_id` = :user_id AND `status` = 'Pending'";
@@ -46,11 +48,6 @@ try {
 
     if ($rental) {
         header('Location: ../rent.php?type=error&message=Cottage is already rented on the selected date');
-        exit();
-    }
-
-    if ($start_timestamp < $current_timestamp) {
-        header('Location: ../rent.php?type=error&message=Start date must be greater than current date');
         exit();
     }
     if ($end_timestamp < $current_timestamp) {

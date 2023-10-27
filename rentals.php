@@ -42,7 +42,7 @@ include_once 'functions/tables/datatables.php';
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
+                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your current earnings.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
@@ -55,7 +55,7 @@ include_once 'functions/tables/datatables.php';
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres your total customer registered.">
+                            <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
@@ -68,7 +68,7 @@ include_once 'functions/tables/datatables.php';
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres your latest customer registered.">
+                            <div class="card shadow border-start-success py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your annual earnings.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">

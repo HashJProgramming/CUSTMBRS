@@ -38,11 +38,12 @@ include_once 'functions/tables/datatables.php';
             <div id="content">
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">User Management</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal"><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Add User</a>
+                        <h3 class="text-dark mb-0">User Management</h3>
+                        <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres you can add new user."><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Add User</a>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
+                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your total users..">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
@@ -55,7 +56,7 @@ include_once 'functions/tables/datatables.php';
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
+                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your latest users added.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">

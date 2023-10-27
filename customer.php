@@ -38,7 +38,8 @@ include_once 'functions/tables/datatables.php';
             <div id="content">
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Customer Management</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal"><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Add Customer</a>
+                        <h3 class="text-dark mb-0">Customer Management</h3>
+                        <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal" data-bs-toggle="tooltip" data-bss-tooltip="" title="Heres you can add new customer."><i class="fas fa-user fa-sm text-white-50"></i>&nbsp;Add Customer</a>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-xl-3 mb-4">

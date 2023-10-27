@@ -37,6 +37,7 @@
               type VARCHAR(255),
               priceDay DOUBLE,
               priceNight DOUBLE,
+              pricePackage DOUBLE,
               picture VARCHAR(255),
               created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
@@ -64,6 +65,7 @@
           start_datetime DATE,
           end_datetime DATE,
           amount DOUBLE,
+          price DOUBLE,
           created_at DATE DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (cottage_id) REFERENCES cottages(id) ON DELETE CASCADE,
           FOREIGN KEY (transact_id) REFERENCES transactions(id) ON DELETE CASCADE

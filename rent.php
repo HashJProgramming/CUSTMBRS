@@ -49,12 +49,12 @@ if (isset($_SESSION['id'])) {
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
+                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your total price.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TOTAL Price</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span><?php echo total_price($_SESSION['id'])?? '0'; ?></span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>₱<?php echo total_price($_SESSION['id'])?? '0'; ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-credit-card fa-2x text-gray-300"></i></div>
                                     </div>
@@ -62,7 +62,7 @@ if (isset($_SESSION['id'])) {
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your montly earnings.">
+                            <div class="card shadow border-start-primary py-2" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can see your total cottage.">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
@@ -202,11 +202,19 @@ if (isset($_SESSION['id'])) {
                                 <optgroup label="SELECT TYPE">
                                     <option value="DAY" selected="">DAY</option>
                                     <option value="NIGHT">NIGHT</option>
+                                    <option value="PACKAGE">PACKAGE</option>
                                 </optgroup>
                             </select>
                         </div>
-                        <input class="form-control" name="start" required type="hidden" value="<?= $_GET['start']?>"/>
-                        <input class="form-control" name="end" required type="hidden" value="<?= $_GET['end']?>"/>
+                        <div class="mb-1"><label class="form-label">Rental Date &amp; Time (start, end)</label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6"><input class="form-control" name="start" required type="date" value="<?= $_GET['start']?>"/></div>
+                                    <div class="col-md-6"><input class="form-control" name="end" required type="date" value="<?= $_GET['end']?>"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
                 </form>
@@ -228,6 +236,7 @@ if (isset($_SESSION['id'])) {
                                 <optgroup label="SELECT TYPE">
                                     <option value="DAY" selected="">DAY</option>
                                     <option value="NIGHT">NIGHT</option>
+                                    <option value="PACKAGE">PACKAGE</option>
                                 </optgroup>
                             </select>
                         </div>

@@ -5,6 +5,7 @@ $name = $_POST['name'];
 $type = $_POST['type'];
 $day = $_POST['priceDay'];
 $night = $_POST['priceNight'];
+$package = $_POST['pricePackage'];
 $picture = $_FILES['picture'];
 
 $sql = "SELECT * FROM cottages WHERE `name` = :name";
@@ -24,12 +25,13 @@ if ($picture['error'] === UPLOAD_ERR_OK) {
     $upload_path = $upload_dir . $new_filename;
 
     if (move_uploaded_file($picture['tmp_name'], $upload_path)) {
-        $sql = "INSERT INTO cottages (`name`, `type`, `picture`, `priceDay`, `priceNight`) VALUES (:name, :type, :picture, :priceDay, :priceNight)";
+        $sql = "INSERT INTO cottages (`name`, `type`, `picture`, `priceDay`, `priceNight`, `pricePackage`) VALUES (:name, :type, :picture, :priceDay, :priceNight, :pricePackage)";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':type', $type);
         $stmt->bindParam(':priceDay', $day);
         $stmt->bindParam(':priceNight', $night);
+        $stmt->bindParam(':pricePackage', $package);
         $stmt->bindParam(':picture', $upload_path);
         $stmt->execute();
 
